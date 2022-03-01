@@ -14,8 +14,13 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+private slots:
+    void on_tabWidget_tabBarClicked(int index);
 
 private:
     Ui::MainWindow *ui;
+//    void DatabaseConnect();
+//    void DatabaseInit();
+//    void DatabasePopulate();
 };
 #endif // MAINWINDOW_H
