@@ -159,11 +159,11 @@ QSqlError initDb()
     if (!q.prepare(INSERT_PROPERTY_SQL))
         return q.lastError();
     addProperty(q, QLatin1String("Size"), QLatin1String("{\"Regular\": 0,\"Large\": 2.5}"), f1, QLatin1String("single select"));
-    addProperty(q, QLatin1String("Size"), QLatin1String("{\"Regular\": 0,\"Large\": 2}"), f2, QLatin1String("single select"));
-    addProperty(q, QLatin1String("Base"), QLatin1String("{\"White Rice\": 0,\"Brown Rice\": 1},\"Mixed Veggie\": 1}}"), f5, QLatin1String("single select"));
+    addProperty(q, QLatin1String("Size"), QLatin1String("{\"Regular\": 0,\"Large\": 2}"), g1, QLatin1String("single select"));
+    addProperty(q, QLatin1String("Base"), QLatin1String("{\"White Rice\": 0,\"Brown Rice\": 1,\"Mixed Veggie\": 1}"), f1, QLatin1String("single select"));
     addProperty(q, QLatin1String("Protein"), QLatin1String("{\"Chicken\": 2,\"Pork\": 2,\"Beef\": 3}"), f1, QLatin1String("single select"));
-    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5},\"Carrot\": 1,\"Cucumber\": 1}"), f3, QLatin1String("single select"));
-    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5},\"Carrot\": 1,\"Cucumber\": 1}"), f3, QLatin1String("single select"));
+    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5,\"Carrot\": 1,\"Cucumber\": 1}"), f1, QLatin1String("multi-select"));
+    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5,\"Carrot\": 1,\"Cucumber\": 1}"), g1, QLatin1String("multi-select"));
 
 
 
