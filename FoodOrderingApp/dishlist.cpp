@@ -64,7 +64,8 @@ void DishList::on_updateDishButton_clicked()
 {
     int selected_row = ui->dishListTable->currentIndex().row();
     int selected_dish_id = dish_model->record(selected_row).field("id").value().toInt();
-    dish_window=new Dish(this, selected_dish_id);
+    double selected_dish_price = dish_model->record(selected_row).field("price").value().toDouble();
+    dish_window=new Dish(this, selected_dish_id, selected_dish_price);
     this->setEnabled(false);
     dish_window->show();
 }
