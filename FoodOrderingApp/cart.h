@@ -31,10 +31,12 @@ private slots:
     void on_updateDishButton_clicked();
     void on_deleteButton_clicked();
 
+    void on_pushButton_2_clicked();
+
 private:
     Ui::Cart *ui;
     QWidget *dish_list_window;
-
+    QWidget *payment_window;
 };
 
 #endif // CART_H

@@ -7,6 +7,7 @@
 #include <QGroupBox>
 #include <QVBoxLayout>
 #include <QLabel>
+#include "payment.h"
 
 
 Cart::Cart(QWidget *dish_list_window, QWidget *parent) :
@@ -100,5 +101,13 @@ void Cart::on_deleteButton_clicked()
     this->dish_list_window->setEnabled(true);
     this->close();
 
+}
+
+
+void Cart::on_pushButton_2_clicked()
+{
+    payment_window = new Payment();
+    this->setEnabled(false);
+    payment_window->show();
 }
 
