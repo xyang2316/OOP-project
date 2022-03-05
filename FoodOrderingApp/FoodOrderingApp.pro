@@ -10,26 +10,25 @@ CONFIG += c++11
 
 SOURCES += \
     cart.cpp \
+    cartdata.cpp \
     dish.cpp \
     dishlist.cpp \
     main.cpp \
-    payment.cpp \
     restaurant.cpp
 
 HEADERS += \
     cart.h \
+    cartdata.h \
     dish.h \
     dishlist.h \
-    global.h \
     initdb.h \
-    payment.h \
-    restaurant.h
+    restaurant.h \
+    typedef.h
 
 FORMS += \
     cart.ui \
     dish.ui \
     dishlist.ui \
-    payment.ui \
     restaurant.ui
 
 # Default rules for deployment.

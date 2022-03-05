@@ -3,15 +3,16 @@
 
 #include <QMainWindow>
 #include <QtSql>
-//#include "global.h"
 
 namespace Ui {class DishList;}
 
 class Dish;
+class Cart;
 class DishList : public QMainWindow
 {
     Q_OBJECT
     friend class Dish;
+    friend class Cart;
 public:
     explicit DishList(QWidget *retaurant_window, int restaurant_id, QWidget *parent = nullptr);
     ~DishList();
@@ -26,6 +27,7 @@ private:
     QWidget *retaurant_window;
     QSqlRelationalTableModel *dish_model;
     Dish *dish_window;
+    Cart *cart_window;
     int restaurant_id;
 };
 

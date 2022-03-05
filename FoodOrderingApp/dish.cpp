@@ -1,5 +1,7 @@
 #include "dish.h"
 #include "ui_dish.h"
+#include "cart.h"
+#include "cartdata.h"
 #include <string>
 #include <QString>
 #include <iostream>
@@ -8,7 +10,6 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QButtonGroup>
-#include "payment.h"
 
 Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, QWidget *parent) :
     QMainWindow(parent),
@@ -49,7 +50,7 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, QWidget *p
 //    ui->singleSelectTable->setSelectionMode(QAbstractItemView::SingleSelection);
 //    ui->singleSelectTable->setCurrentIndex(property_model->index(0, 0));
 
-    // Generate checkboxes
+    // Generate radiobuttons
     for (int row = 0; row < property_model->rowCount(); row++) {
         QByteArray tempjson = property_model->record(row).field("propertyJSON").value().toByteArray();
         QJsonObject json = QJsonDocument::fromJson(tempjson).object();
@@ -103,16 +104,7 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, QWidget *p
         groupbox->setLayout(vbox);
     }
 
-//    // Set the model and hide the ID column:
-//    ui->multiSelectTable->setModel(property_model);
-//    ui->multiSelectTable->setColumnHidden(property_model->fieldIndex("id"), true);
-//    ui->multiSelectTable->setSelectionMode(QAbstractItemView::MultiSelection);
-//    ui->multiSelectTable->setCurrentIndex(property_model->index(0, 0));
-////Display temp balance
-
-
-
-
+////Display dynamic balance
 
 
 }
@@ -132,47 +124,43 @@ void Dish::on_goBackButton_clicked()
 void Dish::on_confirmButton_clicked()
 {
     QList<QGroupBox *> allGroupboxes = ui->verticalLayout->parentWidget()->findChildren<QGroupBox *>();
-    QList<QString> choices = {};
+    QList<QPair<QString, double>> choices = {};
     if (allGroupboxes.size() > 0) {
         for(int i = 0; i < allGroupboxes.size(); ++i){
             QString title = allGroupboxes[i]->title();
-            choices.push_back(title);
+//            choices.push_back(title);
             QList<QRadioButton *> allButtons = allGroupboxes[i]->findChildren<QRadioButton *>();
 //            qDebug() << allButtons;
             if (allButtons.isEmpty()) {
                 QList<QCheckBox *> allButtons = allGroupboxes[i]->findChildren<QCheckBox *>();
                 for(int i = 0; i < allButtons.size(); ++i){
                     if(allButtons.at(i)->isChecked()){
-                         choices.push_back(allButtons.at(i)->text());
+//                         choices.push_back(allButtons.at(i)->text());
+//                        QString tempStr = allButtons.at(i)->text();
+                        QList tempProp = allButtons.at(i)->text().split(QLatin1String(" : $ "));
+                        QString tempStr = title + " : " + tempProp [0];
+                        choices.push_back(QPair<QString, double>(tempStr, tempProp[1].toDouble()));
                     }
                 }
             }
 
             for(int i = 0; i < allButtons.size(); ++i){
                 if(allButtons.at(i)->isChecked()) {
-                     choices.push_back(allButtons.at(i)->text());
+                    QList tempProp = allButtons.at(i)->text().split(QLatin1String(" : $ "));
+                    choices.push_back(QPair<QString, double>(title.append(" : ").append(tempProp[0]), tempProp[1].toDouble()));
                 }
             }
         }
     }
-    qDebug() << choices;
-//    foreach (QString choice, choices) {
-////        QString key = reg
-//        QList list = choice.split(QLatin1String(" : $ "));
-//        qDebug() << list;
-//        memory[list[0]]= list[1].toDouble();
-//    }
-//    qDebug() << memory;
-}
+//    qDebug() << choices;
+    CartData::GetInstance()->addProperties(choices);
+    qDebug() << CartData::GetInstance()->getPriceList();
+    qDebug() << CartData::GetInstance()->getCart();
 
-
-void Dish::on_pushButton_clicked()
-{
-    payment_window = new Payment();
-    this->setEnabled(false);
-    payment_window->show();
-//    dish_list_window=new DishList(this, selected_dish_id);
-//    this->setEnabled(false);
-//    dish_list_window->show();
+//    this->dish_list_window->setEnabled(true);
+    cart_window = new Cart(this);
+    cart_window->show();
+    this->dish_list_window->setEnabled(true);
+    this->close();
 }
 

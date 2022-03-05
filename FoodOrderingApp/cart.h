@@ -5,65 +5,73 @@
 #include <QMap>
 #include <QList>
 
-//namespace Ui {
-//class Cart;
-//}
+QT_BEGIN_NAMESPACE
+namespace Ui { class Cart; }
+QT_END_NAMESPACE
 
-//class Cart : public QMainWindow
-//{
-//    Q_OBJECT
-
-//public:
-//    explicit Cart(QWidget *parent = nullptr);
-//    ~Cart();
-////    void addDishToCart(QMap<QString, double>);
-////    void addPropertiesToCart(QMap<QString, double>&, double);
-////    QMap<QString, double> removeDishFromCart(int);
-////    void updateDishInCart(int, QMap<QString, double>&, double);
-
-
-////    void clearCart();
-
-
-
-//private:
-//    Ui::Cart *ui;
-//    QList<QMap <QString, double> >* inCart;
-//    double sumInCart = 0.0;
-//};
-
-
-#include <iostream>
-#include <thread>
-#include <QString>
-//using namespace std;
-
-class Cart
+//class DishList;
+class Cart : public QMainWindow
 {
-protected:
-    Cart(int value): value_(value){}
-    static Cart* cart_;
-    int value_;
-
+    Q_OBJECT
+//    friend class DishList;
 public:
-    Cart(Cart &other) = delete;
-    void operator=(const Cart &) = delete;
-    static Cart *GetInstance(int);
-    void SomeBusinessLogic(){
-        // ...
-    }
-    int value() const{ return value_; }
+    explicit Cart(QWidget *dish_list_window, QWidget *parent = nullptr);
+    ~Cart();
+
+//    FUNCTIONS go to singleton:
+//    void addDishToCart(QMap<QString, double>);
+//    void addPropertiesToCart(QMap<QString, double>&, double);
+//    QMap<QString, double> removeDishFromCart(int);
+//    void updateDishInCart(int, QMap<QString, double>&, double);
+//    void clearCart();
+
+
+private slots:
+    void on_goBackButton_clicked();
+    void on_updateDishButton_clicked();
+    void on_deleteButton_clicked();
+
+private:
+    Ui::Cart *ui;
+    QWidget *dish_list_window;
+
 };
 
-Cart* Cart::cart_= nullptr;;
-Cart *Cart::GetInstance(int value)
-{
-    if(cart_==nullptr){
-        cart_ = new Cart(value);
-    }
-    return cart_;
-}
 #endif // CART_H
+
+
+
+
+//#include <iostream>
+//#include <thread>
+//#include <QString>
+// //using namespace std;
+
+//class Cart
+//{
+//protected:
+//    Cart(int value): value_(value){}
+//    static Cart* cart_;
+//    int value_;
+
+//public:
+//    Cart(Cart &other) = delete;
+//    void operator=(const Cart &) = delete;
+//    static Cart *GetInstance(int);
+//    void SomeBusinessLogic(){
+//        // ...
+//    }
+//    int value() const{ return value_; }
+//};
+
+//Cart* Cart::cart_= nullptr;;
+//Cart *Cart::GetInstance(int value)
+//{
+//    if(cart_==nullptr){
+//        cart_ = new Cart(value);
+//    }
+//    return cart_;
+//}
 
 
 //dish name        total :

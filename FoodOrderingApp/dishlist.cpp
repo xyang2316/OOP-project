@@ -1,6 +1,9 @@
 #include "dishlist.h"
 #include "ui_dishlist.h"
 #include "dish.h"
+#include "cart.h"
+#include "cartdata.h"
+
 #include <string>
 #include <QString>
 //#include <QtSql>
@@ -56,6 +59,7 @@ DishList::~DishList()
 
 void DishList::on_reselectRestaurantButton_clicked()
 {
+    CartData::GetInstance()->clearCart();
     this->retaurant_window->setEnabled(true);
     this->close();
 }
@@ -64,18 +68,23 @@ void DishList::on_updateDishButton_clicked()
 {
     int selected_row = ui->dishListTable->currentIndex().row();
     int selected_dish_id = dish_model->record(selected_row).field("id").value().toInt();
+    QString selected_dish_name = dish_model->record(selected_row).field("title").value().toString();
     double selected_dish_price = dish_model->record(selected_row).field("price").value().toDouble();
+
+    CartData::GetInstance()->addDish(selected_dish_id, selected_dish_name, selected_dish_price);
+    qDebug() << CartData::GetInstance()->getPriceList();
+    qDebug() << CartData::GetInstance()->getCart();
+
     dish_window=new Dish(this, selected_dish_id, selected_dish_price);
     this->setEnabled(false);
     dish_window->show();
 }
 
-
 void DishList::on_viewCartButton_clicked()
 {
-//    global_cart->show();
- //    this->setEnabled(false);
- //    this->close();
+    cart_window = new Cart(this);
+    this->setEnabled(false);
+    cart_window->show();
 
 }
 
