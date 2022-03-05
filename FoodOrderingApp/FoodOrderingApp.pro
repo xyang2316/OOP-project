@@ -13,6 +13,7 @@ SOURCES += \
     dish.cpp \
     dishlist.cpp \
     main.cpp \
+    payment.cpp \
     restaurant.cpp
 
 HEADERS += \
@@ -21,12 +22,14 @@ HEADERS += \
     dishlist.h \
     global.h \
     initdb.h \
+    payment.h \
     restaurant.h
 
 FORMS += \
     cart.ui \
     dish.ui \
     dishlist.ui \
+    payment.ui \
     restaurant.ui
 
 # Default rules for deployment.

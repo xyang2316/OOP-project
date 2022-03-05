@@ -22,6 +22,8 @@ private slots:
 //    bool calculate(double rightOperand, const QString &pendingOperator);
     void on_confirmButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::Dish *ui;
     QWidget *dish_list_window;
@@ -29,6 +31,7 @@ private:
     int dish_id;
 //    QList<QList<QString>> memory;
     double dishSum;
+    QWidget *payment_window;
 };
 
 #endif // DISH_H

@@ -8,6 +8,7 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QButtonGroup>
+#include "payment.h"
 
 Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, QWidget *parent) :
     QMainWindow(parent),
@@ -162,5 +163,16 @@ void Dish::on_confirmButton_clicked()
 //        memory[list[0]]= list[1].toDouble();
 //    }
 //    qDebug() << memory;
+}
+
+
+void Dish::on_pushButton_clicked()
+{
+    payment_window = new Payment();
+    this->setEnabled(false);
+    payment_window->show();
+//    dish_list_window=new DishList(this, selected_dish_id);
+//    this->setEnabled(false);
+//    dish_list_window->show();
 }
 
