@@ -9,11 +9,9 @@ QT_BEGIN_NAMESPACE
 namespace Ui { class Cart; }
 QT_END_NAMESPACE
 
-//class DishList;
 class Cart : public QMainWindow
 {
     Q_OBJECT
-//    friend class DishList;
 public:
     explicit Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent = nullptr);
     ~Cart();

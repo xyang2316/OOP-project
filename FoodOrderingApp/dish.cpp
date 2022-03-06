@@ -51,20 +51,6 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restau
     if (!property_model->select()) {
         qDebug() << property_model->lastError();
     }
-//    ui->tableViewTest->setModel(property_model);
-
-
-    //     Create the data model:
-//    property_model = new QSqlRelationalTableModel();
-//    // property_model = new QSqlRelationalTableModel(ui->singleSelectTable);
-//    property_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-//    property_model->setTable("properties");
-
-//    // Set the relations to the other database tables:
-//    property_model->setRelation(property_model->fieldIndex("book"), QSqlRelation("books", "id", "title"));
-//    property_model->setHeaderData(property_model->fieldIndex("book"), Qt::Horizontal, tr("Dish"));
-//    property_model->setHeaderData(property_model->fieldIndex("property"), Qt::Horizontal, tr("Category"));
-//    property_model->setHeaderData(property_model->fieldIndex("propertyJSON"), Qt::Horizontal, tr("JSON"));
 
 //// option box
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());

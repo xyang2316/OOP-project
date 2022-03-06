@@ -13,12 +13,14 @@ public:
 
     QList<QPair<int, double>> getPriceList();
     QList<QList<QPair<QString, double>>> getCart();
+    QString getInCartStr();
     double getSumInCart();
 
     void addDish(int, QString&, double);
     void addProperties(QList<QPair<QString, double>>&);
     QPair<int, QPair<QString, double>> removeDishFromCart(int);
     void clearCart();
+
 
 
 
@@ -29,6 +31,7 @@ protected:
     double sumInCart;
     QList<QList<QPair<QString, double>>> inCart;
     QList<QPair<int, double>> priceList;
+    QString inCartStr;
 
 };
 

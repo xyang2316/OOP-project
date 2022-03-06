@@ -1,5 +1,5 @@
 #include "cartdata.h"
-
+#include <QDebug>
 
 CartData::CartData()
 {
@@ -26,6 +26,29 @@ double CartData::getSumInCart() {
     return sumInCart;
 }
 
+QString CartData::getInCartStr() {
+    inCart = getCart();
+    QString inCartStr;
+    int i = 1;
+    qDebug()<< "inside cartdata1"<< inCart;
+    for (auto& dishList: inCart)
+    {
+        qDebug()<< "inside cartdata"<< dishList;
+        inCartStr += "Dish " + QString::number(i) + ": ";
+        for(auto& eachPair:dishList)
+        {
+            inCartStr += eachPair.first + " ";
+            inCartStr += "$" + QString::number(eachPair.second) + " ";
+        }
+        inCartStr += "; ";
+        i ++;
+    }
+    qDebug()<< "inside cartdata"<< inCartStr;
+    return inCartStr;
+}
+
+
+
 void CartData::addDish(int dishId, QString& dishName, double dishPrice) {
     QList<QPair<QString, double>> tempDish;
     priceList.push_back(QPair<int, double>(dishId, dishPrice));
@@ -36,7 +59,7 @@ void CartData::addDish(int dishId, QString& dishName, double dishPrice) {
 
 void CartData::addProperties(QList<QPair<QString, double>>& properties) {
     inCart.last().append(properties);
-    for (auto p : properties ) {
+    for (auto& p : properties ) {
         priceList.last().second += p.second;
     }
     sumInCart += priceList.last().second;
