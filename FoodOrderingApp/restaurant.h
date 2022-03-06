@@ -20,6 +20,8 @@ public:
 private slots:
     void on_pushButton_clicked();
 
+    void on_restaurantTable_clicked(const QModelIndex &index);
+
 private:
     Ui::Restaurant *ui;
 //    QSqlRelationalTableModel *model;

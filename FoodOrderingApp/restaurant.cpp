@@ -22,19 +22,11 @@ Restaurant::Restaurant(QWidget *parent)
         return;
     }
 
-//    QSqlQuery query(db);
-//    query.exec("select * from Restaurant");
-//    while(query.next()){
-//        qDebug()<<query.value(1).toString();
-//    }
-
     this->model = new QSqlQueryModel();
-    model->setQuery("Select * from Restaurant");
+    model->setQuery("Select r_id, r_name from Restaurant");
     ui->restaurantTable->setModel(model);
-
-
-
-
+    ui->restaurantTable->setColumnWidth(0, 50);
+    ui->restaurantTable->setColumnWidth(1, 150);
 
 
     // Create the data model:
@@ -54,8 +46,8 @@ Restaurant::Restaurant(QWidget *parent)
 //    // Set the model and hide the ID column:
 //    ui->restaurantTable->setModel(model);
 //    ui->restaurantTable->setColumnHidden(model->fieldIndex("id"), true);
-//    ui->restaurantTable->setSelectionMode(QAbstractItemView::SingleSelection);
-//    ui->restaurantTable->setCurrentIndex(model->index(0, 0));
+    ui->restaurantTable->setSelectionMode(QAbstractItemView::SingleSelection);
+    ui->restaurantTable->setCurrentIndex(model->index(0, 0));
 }
 
 Restaurant::~Restaurant()
@@ -67,8 +59,16 @@ Restaurant::~Restaurant()
 void Restaurant::on_pushButton_clicked()
 {
     int selected_row = ui->restaurantTable->currentIndex().row();
+    qDebug()<<selected_row;
     int selected_dish_id = model->record(selected_row).field("id").value().toInt();
     dish_list_window=new DishList(this, selected_dish_id);
     this->setEnabled(false);
     dish_list_window->show();
 }
+
+void Restaurant::on_restaurantTable_clicked(const QModelIndex &index)
+{
+//    qDebug()<<"click"<<index;
+
+}
+
