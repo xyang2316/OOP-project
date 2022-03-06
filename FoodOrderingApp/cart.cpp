@@ -10,11 +10,12 @@
 #include "payment.h"
 
 
-Cart::Cart(QWidget *dish_list_window, QWidget *parent) :
+Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Cart)
 {
     this->dish_list_window = dish_list_window;
+    this->restaurant_id = restaurant_id;
     ui->setupUi(this);
 
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());
@@ -78,7 +79,7 @@ void Cart::on_updateDishButton_clicked()
     QString dishName = temp.second.first;
     double dishPrice = temp.second.second;
     CartData::GetInstance()->addDish(dishId,dishName, dishPrice);
-    Dish* newDish_window = new Dish(this, dishId, dishPrice);
+    Dish* newDish_window = new Dish(this, dishId, dishPrice, restaurant_id);
     newDish_window->show();
     this->close();
 
@@ -106,7 +107,7 @@ void Cart::on_deleteButton_clicked()
 
 void Cart::on_pushButton_2_clicked()
 {
-    payment_window = new Payment(this);
+    payment_window = new Payment(this, restaurant_id);
     this->setEnabled(false);
     payment_window->show();
 }

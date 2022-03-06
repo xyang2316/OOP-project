@@ -14,7 +14,7 @@ class Dish : public QMainWindow
     Q_OBJECT
     friend class Cart;
 public:
-    explicit Dish(QWidget *dish_list_window, int dish_id, double dish_price, QWidget *parent = nullptr);
+    explicit Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restaurant_id, QWidget *parent = nullptr);
     ~Dish();
 
 private slots:
@@ -30,6 +30,7 @@ private:
     int dish_id;
 //    QList<QList<QString>> memory;
     double dishSum;
+    int restaurant_id;
 };
 
 #endif // DISH_H

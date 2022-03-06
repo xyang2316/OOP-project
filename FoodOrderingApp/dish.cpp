@@ -11,11 +11,12 @@
 #include <QGroupBox>
 #include <QButtonGroup>
 
-Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, QWidget *parent) :
+Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Dish)
 {
     this->dish_list_window = dish_list_window;
+    this->restaurant_id = restaurant_id;
     ui->setupUi(this);
     this->dish_id = dish_id;
     dishSum = dish_price;
@@ -158,7 +159,7 @@ void Dish::on_confirmButton_clicked()
     qDebug() << CartData::GetInstance()->getCart();
 
 //    this->dish_list_window->setEnabled(true);
-    cart_window = new Cart(this);
+    cart_window = new Cart(this, restaurant_id);
     cart_window->show();
     this->dish_list_window->setEnabled(true);
     this->close();

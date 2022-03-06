@@ -21,14 +21,13 @@ Restaurant::Restaurant(QWidget *parent)
     if (err.type() != QSqlError::NoError) {
         return;
     }
-    //for debug
-    mydb = db;
-    //
+
     this->model = new QSqlQueryModel();
     model->setQuery("Select r_id, r_name from Restaurant");
     ui->restaurantTable->setModel(model);
     ui->restaurantTable->setColumnWidth(0, 50);
     ui->restaurantTable->setColumnWidth(1, 150);
+//    ui->restaurantTable->setColumnHidden(0, true);
 
 
     // Create the data model:

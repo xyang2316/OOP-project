@@ -13,7 +13,7 @@ class Payment : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit Payment(QWidget *cart_window, QWidget *parent = nullptr);
+    explicit Payment(QWidget *cart_window, int restaurant_id, QWidget *parent = nullptr);
     ~Payment();
 
 private slots:
@@ -24,11 +24,16 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+    void insertOrder(QString oid, float sumPaid, int rid, QString dishesInfo);
+
+
 private:
     Ui::Payment *ui;
     QWidget *cart_window;
     double sumToPay;
     double walletBalance;
+    int restaurant_id;
 };
 
 #endif // PAYMENT_H

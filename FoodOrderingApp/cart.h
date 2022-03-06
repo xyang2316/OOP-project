@@ -15,7 +15,7 @@ class Cart : public QMainWindow
     Q_OBJECT
 //    friend class DishList;
 public:
-    explicit Cart(QWidget *dish_list_window, QWidget *parent = nullptr);
+    explicit Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent = nullptr);
     ~Cart();
 
 //    FUNCTIONS go to singleton:
@@ -37,6 +37,7 @@ private:
     Ui::Cart *ui;
     QWidget *dish_list_window;
     QWidget *payment_window;
+    int restaurant_id;
 };
 
 #endif // CART_H

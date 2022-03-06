@@ -77,14 +77,14 @@ void DishList::on_updateDishButton_clicked()
     qDebug() << CartData::GetInstance()->getPriceList();
     qDebug() << CartData::GetInstance()->getCart();
 
-    dish_window=new Dish(this, selected_dish_id, selected_dish_price);
+    dish_window=new Dish(this, selected_dish_id, selected_dish_price, restaurant_id);
     this->setEnabled(false);
     dish_window->show();
 }
 
 void DishList::on_viewCartButton_clicked()
 {
-    cart_window = new Cart(this);
+    cart_window = new Cart(this, restaurant_id);
     this->setEnabled(false);
     cart_window->show();
 
