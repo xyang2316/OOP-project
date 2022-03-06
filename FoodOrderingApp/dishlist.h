@@ -22,6 +22,8 @@ private slots:
     void on_updateDishButton_clicked();
     void on_viewCartButton_clicked();
 
+    void on_dishListTable_clicked(const QModelIndex &index);
+
 private:
     Ui::DishList *ui;
     QWidget *retaurant_window;

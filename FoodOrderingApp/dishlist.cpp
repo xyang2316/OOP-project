@@ -19,6 +19,7 @@ DishList::DishList(QWidget *retaurant_window, int restaurant_id, QWidget *parent
 
     this->dish_model = new QSqlQueryModel();
     dish_model->setQuery("Select * from Dish where r_id =" + QString::number(restaurant_id));
+    qDebug()<<"rid"<<QString::number(restaurant_id);
     ui->dishListTable->setModel(dish_model);
 
 
@@ -69,7 +70,7 @@ void DishList::on_reselectRestaurantButton_clicked()
 void DishList::on_updateDishButton_clicked()
 {
     int selected_row = ui->dishListTable->currentIndex().row();
-    int selected_dish_id = dish_model->record(selected_row).field("id").value().toInt();
+    int selected_dish_id = dish_model->record(selected_row).field("dish_id").value().toInt();
     QString selected_dish_name = dish_model->record(selected_row).field("dish_name").value().toString();
     double selected_dish_price = dish_model->record(selected_row).field("price").value().toDouble();
 
@@ -87,6 +88,12 @@ void DishList::on_viewCartButton_clicked()
     cart_window = new Cart(this, restaurant_id);
     this->setEnabled(false);
     cart_window->show();
+
+}
+
+
+void DishList::on_dishListTable_clicked(const QModelIndex &index)
+{
 
 }
 

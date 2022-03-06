@@ -26,6 +26,8 @@ private slots:
 
     void on_pushButton_checkBalance_clicked();
     void insertOrder(QString oid, float sumPaid, int rid, QString dishesInfo);
+    void on_pushButton_home_clicked();
+
 public:
     float getWalletBalance();
 

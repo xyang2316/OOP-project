@@ -27,6 +27,7 @@ private:
     QWidget *dish_list_window;
     QWidget *cart_window;
     QSqlRelationalTableModel *property_model;
+//    QSqlQueryModel *property_model;
     int dish_id;
 //    QList<QList<QString>> memory;
     double dishSum;

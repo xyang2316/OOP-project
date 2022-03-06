@@ -74,12 +74,12 @@ void HomePage::on_pushButton_addBalance_clicked()
     if (qry.exec()){
         qDebug()<< "add$ success: new balance"<<newValueStr;
         QMessageBox msg;
-        msg.setText("Successfully added $" + topupValueStr + " to your e-wallet!");
+        msg.setText("Successfully added." + topupValueStr + " to your e-wallet!");
         msg.setWindowTitle(QStringLiteral("Payment success！"));
         msg.exec();
     }
     else{
-        qDebug()<<"add$ fail"<<qry.lastError();
+        qDebug()<<"Fail to add."<<qry.lastError();
         QMessageBox msg;
         msg.setText(qry.lastError().text());
         msg.setWindowTitle(QStringLiteral("Payment failed！"));

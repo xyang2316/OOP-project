@@ -21,17 +21,50 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restau
     this->dish_id = dish_id;
     dishSum = dish_price;
 
+//    qDebug() << QString::number(dish_id);
+//    property_model = new QSqlQueryModel(this);
+//    property_model->setQuery("Select * from properties where book =" + QString::number(dish_id));
+//    qDebug() << QString::number(dish_id);
+//    ui->tableViewTest->setModel(property_model);
+
 //     Create the data model:
+//    property_model = new QSqlRelationalTableModel();
+////    property_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+//    property_model->setTable("properties");
+
+//    property_model->setRelation(property_model->fieldIndex("book"), QSqlRelation("Dish", "book", "property"));
+//    if (!property_model->select()){
+//        qDebug() << property_model->lastError();
+//    };
+//    ui->tableViewTest->setModel(property_model);
+
     property_model = new QSqlRelationalTableModel();
     // property_model = new QSqlRelationalTableModel(ui->singleSelectTable);
     property_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
     property_model->setTable("properties");
-
+    qDebug()<< "fieldindex"<<property_model->fieldIndex("book");
     // Set the relations to the other database tables:
-    property_model->setRelation(property_model->fieldIndex("book"), QSqlRelation("books", "id", "title"));
+    property_model->setRelation(property_model->fieldIndex("book"), QSqlRelation("Dish", "dish_id", "dish_name"));
     property_model->setHeaderData(property_model->fieldIndex("book"), Qt::Horizontal, tr("Dish"));
     property_model->setHeaderData(property_model->fieldIndex("property"), Qt::Horizontal, tr("Category"));
     property_model->setHeaderData(property_model->fieldIndex("propertyJSON"), Qt::Horizontal, tr("JSON"));
+    if (!property_model->select()) {
+        qDebug() << property_model->lastError();
+    }
+//    ui->tableViewTest->setModel(property_model);
+
+
+    //     Create the data model:
+//    property_model = new QSqlRelationalTableModel();
+//    // property_model = new QSqlRelationalTableModel(ui->singleSelectTable);
+//    property_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+//    property_model->setTable("properties");
+
+//    // Set the relations to the other database tables:
+//    property_model->setRelation(property_model->fieldIndex("book"), QSqlRelation("books", "id", "title"));
+//    property_model->setHeaderData(property_model->fieldIndex("book"), Qt::Horizontal, tr("Dish"));
+//    property_model->setHeaderData(property_model->fieldIndex("property"), Qt::Horizontal, tr("Category"));
+//    property_model->setHeaderData(property_model->fieldIndex("propertyJSON"), Qt::Horizontal, tr("JSON"));
 
 //// option box
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());
@@ -43,7 +76,6 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restau
     if (!property_model->select()) {
         return;
     }
-
 //// single select
 //    // Set the model and hide the ID column:
 //    ui->singleSelectTable->setModel(property_model);
@@ -60,13 +92,11 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restau
 //        layout->addWidget(label);
         QGroupBox *groupbox = new QGroupBox(tr(labelText));
         layout->addWidget(groupbox);
-//        layout->setDirection(QVBoxLayout::TopToBottom);
         QVBoxLayout *vbox = new QVBoxLayout;
         foreach(const QString& key, json.keys()) {
               QJsonValue value = json.value(key);
               QString text = QString("%1 : $%2").arg(key).arg(value.toDouble(),5,'f',2);
               QRadioButton* radiobutton = new QRadioButton(text, ui->centralwidget);
-//              vbox->setDirection(QVBoxLayout::TopToBottom);
               vbox->addWidget(radiobutton);
               if (key == json.keys()[0])
                   radiobutton->setChecked(true);
@@ -88,18 +118,13 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restau
         QByteArray tempjson = property_model->record(row).field("propertyJSON").value().toByteArray();
         QJsonObject json = QJsonDocument::fromJson(tempjson).object();
         QByteArray labelText = property_model->record(row).field("property").value().toByteArray();
-//        QString labelText = property_model->record(row).field("property").value().toString();
-//        QLabel* label = new QLabel(labelText);
-//        layout->addWidget(label);
         QGroupBox *groupbox = new QGroupBox(tr(labelText));
         layout->addWidget(groupbox);
         QVBoxLayout *vbox = new QVBoxLayout;
-//        QButtonGroup group;
         foreach(const QString& key, json.keys()) {
               QJsonValue value = json.value(key);
               QString text = QString("%1 : $%2").arg(key).arg(value.toDouble(),5,'f',2);
               QCheckBox* checkbox = new QCheckBox(text, ui->centralwidget);
-//              group.addButton(checkbox);
               vbox->addWidget(checkbox);
         }
         groupbox->setLayout(vbox);
@@ -129,15 +154,12 @@ void Dish::on_confirmButton_clicked()
     if (allGroupboxes.size() > 0) {
         for(int i = 0; i < allGroupboxes.size(); ++i){
             QString title = allGroupboxes[i]->title();
-//            choices.push_back(title);
             QList<QRadioButton *> allButtons = allGroupboxes[i]->findChildren<QRadioButton *>();
 //            qDebug() << allButtons;
             if (allButtons.isEmpty()) {
                 QList<QCheckBox *> allButtons = allGroupboxes[i]->findChildren<QCheckBox *>();
                 for(int i = 0; i < allButtons.size(); ++i){
                     if(allButtons.at(i)->isChecked()){
-//                         choices.push_back(allButtons.at(i)->text());
-//                        QString tempStr = allButtons.at(i)->text();
                         QList tempProp = allButtons.at(i)->text().split(QLatin1String(" : $ "));
                         QString tempStr = title + " : " + tempProp [0];
                         choices.push_back(QPair<QString, double>(tempStr, tempProp[1].toDouble()));
@@ -153,12 +175,10 @@ void Dish::on_confirmButton_clicked()
             }
         }
     }
-//    qDebug() << choices;
     CartData::GetInstance()->addProperties(choices);
     qDebug() << CartData::GetInstance()->getPriceList();
     qDebug() << CartData::GetInstance()->getCart();
 
-//    this->dish_list_window->setEnabled(true);
     cart_window = new Cart(this, restaurant_id);
     cart_window->show();
     this->dish_list_window->setEnabled(true);

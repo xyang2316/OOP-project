@@ -6,35 +6,34 @@
 #include <QMessageBox>
 
 QSqlDatabase db;
-//QSqlError createDBConnection();
 void closeDB();
 
-QVariant addBook(QSqlQuery &q, const QString &title, double price, const QVariant &authorId,
-             const QVariant &genreId, int rating)
-{
-    q.addBindValue(title);
-    q.addBindValue(price);
-    q.addBindValue(authorId);
-    q.addBindValue(genreId);
-    q.addBindValue(rating);
-    q.exec();
-    return q.lastInsertId();
-}
+//QVariant addBook(QSqlQuery &q, const QString &title, double price, const QVariant &authorId,
+//             const QVariant &genreId, int rating)
+//{
+//    q.addBindValue(title);
+//    q.addBindValue(price);
+//    q.addBindValue(authorId);
+//    q.addBindValue(genreId);
+//    q.addBindValue(rating);
+//    q.exec();
+//    return q.lastInsertId();
+//}
 
-QVariant addGenre(QSqlQuery &q, const QString &name)
-{
-    q.addBindValue(name);
-    q.exec();
-    return q.lastInsertId();
-}
+//QVariant addGenre(QSqlQuery &q, const QString &name)
+//{
+//    q.addBindValue(name);
+//    q.exec();
+//    return q.lastInsertId();
+//}
 
-QVariant addAuthor(QSqlQuery &q, const QString &name, QDate birthdate)
-{
-    q.addBindValue(name);
-    q.addBindValue(birthdate);
-    q.exec();
-    return q.lastInsertId();
-}
+//QVariant addAuthor(QSqlQuery &q, const QString &name, QDate birthdate)
+//{
+//    q.addBindValue(name);
+//    q.addBindValue(birthdate);
+//    q.exec();
+//    return q.lastInsertId();
+//}
 
 // newly added
 void addProperty(QSqlQuery &q, const QString &property, const QString &propertyJSON, const QVariant &bookId,
@@ -54,54 +53,39 @@ void addProperty(QSqlQuery &q, const QString &property, const QString &propertyJ
 //    return q.lastInsertId();
 //}
 
-const auto PROPERTIES_SQL = QLatin1String(R"(
-    create table properties(id integer primary key, property varchar, propertyJSON varchar, book integer, propertyType varchar)
-    )");
+//const auto PROPERTIES_SQL = QLatin1String(R"(
+//    create table properties(id integer primary key, property varchar, propertyJSON varchar, book integer, propertyType varchar)
+//    )");
 
-const auto BOOKS_SQL = QLatin1String(R"(
-    create table books(id integer primary key, title varchar, author integer,
-                       genre integer, price double, rating integer)
-    )");
+//const auto BOOKS_SQL = QLatin1String(R"(
+//    create table books(id integer primary key, title varchar, author integer,
+//                       genre integer, price double, rating integer)
+//    )");
 
-const auto AUTHORS_SQL =  QLatin1String(R"(
-    create table authors(id integer primary key, name varchar, birthdate date)
-    )");
+//const auto AUTHORS_SQL =  QLatin1String(R"(
+//    create table authors(id integer primary key, name varchar, birthdate date)
+//    )");
 
-const auto GENRES_SQL = QLatin1String(R"(
-    create table genres(id integer primary key, name varchar)
-    )");
+//const auto GENRES_SQL = QLatin1String(R"(
+//    create table genres(id integer primary key, name varchar)
+//    )");
 
-const auto INSERT_PROPERTY_SQL = QLatin1String(R"(
-    insert into properties(property, propertyJSON, book, propertyType)
-                      values(?, ?, ?, ?)
-    )");
+//const auto INSERT_PROPERTY_SQL = QLatin1String(R"(
+//    insert into properties(property, propertyJSON, book, propertyType)
+//                      values(?, ?, ?, ?)
+//    )");
 
-const auto INSERT_AUTHOR_SQL = QLatin1String(R"(
-    insert into authors(name, birthdate) values(?, ?)
-    )");
+//const auto INSERT_AUTHOR_SQL = QLatin1String(R"(
+//    insert into authors(name, birthdate) values(?, ?)
+//    )");
 
-const auto INSERT_BOOK_SQL = QLatin1String(R"(
-    insert into books(title, price, author, genre, rating)
-                      values(?, ?, ?, ?, ?)
-    )");
-const auto INSERT_GENRE_SQL = QLatin1String(R"(
-    insert into genres(name) values(?)
-    )");
-
-QSqlError createDBConnection()
-{
-    qDebug()<<"start!!!!!!";
-    db = QSqlDatabase::addDatabase("QSQLITE", "connection");
-    db.setDatabaseName("/Users/yangxueying/Desktop/OOP-project/QtDB.db");
-    qDebug()  <<  "drive" << QSqlDatabase::drivers();
-
-    if(!db.open()){
-        qDebug()<<"error open db";
-        return QSqlError();
-    }
-    qDebug()<< "end" << db.databaseName();
-    return QSqlError();
-}
+//const auto INSERT_BOOK_SQL = QLatin1String(R"(
+//    insert into books(title, price, author, genre, rating)
+//                      values(?, ?, ?, ?, ?)
+//    )");
+//const auto INSERT_GENRE_SQL = QLatin1String(R"(
+//    insert into genres(name) values(?)
+//    )");
 
 void closeDB()
 {
@@ -123,7 +107,7 @@ QSqlError initDb()
 
     if (!db.open())
         return db.lastError();
-    qDebug()  << "drive" << QSqlDatabase::drivers();
+    qDebug()<< "drive" << QSqlDatabase::drivers();
     qDebug()<< "end" << db.databaseName();
 
 //    QStringList tables = db.tables();
@@ -188,9 +172,15 @@ QSqlError initDb()
 //    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5,\"Carrot\": 1,\"Cucumber\": 1}"), f1, QLatin1String("multi-select"));
 //    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5,\"Carrot\": 1,\"Cucumber\": 1}"), g1, QLatin1String("multi-select"));
 
-
-
-
+//    QSqlQuery q;
+//    if (!q.prepare(INSERT_PROPERTY_SQL))
+//        return q.lastError();
+//    addProperty(q, QLatin1String("Size"), QLatin1String("{\"Regular\": 0,\"Large\": 2.5}"), QLatin1String("Thai"), QLatin1String("single select"));
+//    addProperty(q, QLatin1String("Size"), QLatin1String("{\"Regular\": 0,\"Large\": 2}"), QLatin1String("Pizza"), QLatin1String("single select"));
+//    addProperty(q, QLatin1String("Base"), QLatin1String("{\"White Rice\": 0,\"Brown Rice\": 1,\"Mixed Veggie\": 1}"), QLatin1String("Thai"), QLatin1String("single select"));
+//    addProperty(q, QLatin1String("Protein"), QLatin1String("{\"Chicken\": 2,\"Pork\": 2,\"Beef\": 3}"), QLatin1String("Thai"), QLatin1String("single select"));
+//    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5,\"Carrot\": 1,\"Cucumber\": 1}"), QLatin1String("Thai"), QLatin1String("multi-select"));
+//    addProperty(q, QLatin1String("Addon"), QLatin1String("{\"Mushroom\": 1.5,\"Carrot\": 1,\"Cucumber\": 1}"), QLatin1String("Pizza"), QLatin1String("multi-select"));
 
     return QSqlError();
 }

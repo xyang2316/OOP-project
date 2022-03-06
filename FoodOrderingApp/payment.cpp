@@ -145,3 +145,11 @@ float Payment::getWalletBalance()
 
 
 
+
+void Payment::on_pushButton_home_clicked()
+{
+    //TODO
+    this->close();
+    cart_window->close();
+}
+
