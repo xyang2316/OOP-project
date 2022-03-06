@@ -25,10 +25,11 @@ private slots:
 private:
     Ui::DishList *ui;
     QWidget *retaurant_window;
-    QSqlRelationalTableModel *dish_model;
+//    QSqlRelationalTableModel *dish_model;
     Dish *dish_window;
     Cart *cart_window;
     int restaurant_id;
+    QSqlQueryModel *dish_model;
 };
 
 #endif // DISHLIST_H

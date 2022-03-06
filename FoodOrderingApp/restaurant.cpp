@@ -53,15 +53,15 @@ Restaurant::Restaurant(QWidget *parent)
 Restaurant::~Restaurant()
 {
     delete ui;
-//    closeDB();
 }
 
 void Restaurant::on_pushButton_clicked()
 {
     int selected_row = ui->restaurantTable->currentIndex().row();
-    qDebug()<<selected_row;
-    int selected_dish_id = model->record(selected_row).field("id").value().toInt();
-    dish_list_window=new DishList(this, selected_dish_id);
+//    qDebug()<<selected_row;
+    int selected_restaurant_id = model->record(selected_row).field("r_id").value().toInt();
+//    qDebug()<<selected_restaurant_id;
+    dish_list_window=new DishList(this, selected_restaurant_id);
     this->setEnabled(false);
     dish_list_window->show();
 }
@@ -69,6 +69,5 @@ void Restaurant::on_pushButton_clicked()
 void Restaurant::on_restaurantTable_clicked(const QModelIndex &index)
 {
 //    qDebug()<<"click"<<index;
-
 }
 
