@@ -5,6 +5,8 @@
 
 #include <QtSql>
 #include <QtWidgets>
+#include <QtCore>
+#include <QtGui>
 
 Restaurant::Restaurant(QWidget *parent)
     : QMainWindow(parent)
@@ -20,50 +22,46 @@ Restaurant::Restaurant(QWidget *parent)
         return;
     }
 
-    // Create the data model:
-    model = new QSqlRelationalTableModel(ui->restaurantTable);
-    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-    model->setTable("authors");
+//    QSqlQuery query(db);
+//    query.exec("select * from Restaurant");
+//    while(query.next()){
+//        qDebug()<<query.value(1).toString();
+//    }
 
-    // Remember the indexes of the columns:
-//    authorIdx = model->fieldIndex("author");
-//    genreIdx = model->fieldIndex("genre");
-
-    // Set the relations to the other database tables:
-//    model->setRelation(authorIdx, QSqlRelation("authors", "id", "name"));
-//    model->setRelation(genreIdx, QSqlRelation("genres", "id", "name"));
-
-    // Set the localized header captions:
-    model->setHeaderData(model->fieldIndex("author"), Qt::Horizontal, tr("Author Name"));
-    model->setHeaderData(model->fieldIndex("birthdate"), Qt::Horizontal, tr("Birth Date"));
-
-//    model->setHeaderData(authorIdx, Qt::Horizontal, tr("Author Name"));
-//    model->setHeaderData(genreIdx, Qt::Horizontal, tr("Genre"));
-//    model->setHeaderData(model->fieldIndex("title"),
-//                         Qt::Horizontal, tr("Title"));
-//    model->setHeaderData(model->fieldIndex("year"), Qt::Horizontal, tr("Year"));
-//    model->setHeaderData(model->fieldIndex("rating"),
-//                         Qt::Horizontal, tr("Rating"));
-
-    // Populate the model:
-    if (!model->select()) {
-        return;
-    }
-
-    // Set the model and hide the ID column:
+    this->model = new QSqlQueryModel();
+    model->setQuery("Select * from Restaurant");
     ui->restaurantTable->setModel(model);
-    ui->restaurantTable->setColumnHidden(model->fieldIndex("id"), true);
-    ui->restaurantTable->setSelectionMode(QAbstractItemView::SingleSelection);
-    ui->restaurantTable->setCurrentIndex(model->index(0, 0));
 
-    // 下面这样不太妥，参考一下 https://www.youtube.com/watch?v=fNTnU7mMgK4
-    // QCheckBox *dynamic = new QCheckBox("This is a check box");
-    // dynamic->show();
+
+
+
+
+
+    // Create the data model:
+//    model = new QSqlRelationalTableModel(ui->restaurantTable);
+//    model->setEditStrategy(QSqlTableModel::OnManualSubmit);
+//    model->setTable("authors");
+
+//    // Set the localized header captions:
+//    model->setHeaderData(model->fieldIndex("author"), Qt::Horizontal, tr("Author Name"));
+//    model->setHeaderData(model->fieldIndex("birthdate"), Qt::Horizontal, tr("Birth Date"));
+
+//    // Populate the model:
+//    if (!model->select()) {
+//        return;
+//    }
+
+//    // Set the model and hide the ID column:
+//    ui->restaurantTable->setModel(model);
+//    ui->restaurantTable->setColumnHidden(model->fieldIndex("id"), true);
+//    ui->restaurantTable->setSelectionMode(QAbstractItemView::SingleSelection);
+//    ui->restaurantTable->setCurrentIndex(model->index(0, 0));
 }
 
 Restaurant::~Restaurant()
 {
     delete ui;
+//    closeDB();
 }
 
 void Restaurant::on_pushButton_clicked()
