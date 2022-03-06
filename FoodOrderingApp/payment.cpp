@@ -28,9 +28,9 @@ Payment::Payment(QWidget *cart_window, int restaurant_id, QWidget *parent) :
        bValue = query.value(accountbalance).toFloat();
        qDebug() << bValue;
     }
-    QString balanceDisplay = "wallet: $";
-    balanceDisplay += QString::number(bValue);
-    QLabel* balance = new QLabel(balanceDisplay);
+//    QString balanceDisplay = "wallet: $";
+//    balanceDisplay += QString::number(bValue);
+//    QLabel* balance = new QLabel(balanceDisplay);
     layout->addWidget(sum);
 //    layout->addWidget(balance);
     sumToPay = CartData::GetInstance()->getSumInCart();
@@ -99,8 +99,7 @@ void Payment::on_pushButton_clicked()
             //insert to order
             QDateTime date = QDateTime::currentDateTime();
             QString formattedTime = date.toString("dd.MM.yyyy hh:mm:ss");
-//            QByteArray formattedTimeMsg = formattedTime.toLocal8Bit();
-            insertOrder(formattedTime, sumToPay, restaurant_id, "xxxx");
+            insertOrder(formattedTime, sumToPay, restaurant_id, "xxxx");//TODOdishes
 
     }
     else
@@ -120,11 +119,7 @@ void Payment::insertOrder(QString oid, float sumPaid, int rid, QString dishesInf
     qry.addBindValue(oid);
     qry.addBindValue(sumPaid);
     qry.addBindValue(rid);
-    qry.addBindValue("blank");
-//    qry.bindValue(":o_id", oid);
-//    qry.bindValue(":paid_amount", sumPaid);
-//    qry.bindValue(":r_id", rid);
-//    qry.bindValue(":d_info", dishesInfo);
+    qry.addBindValue("NA");
     qDebug()<<oid <<sumPaid << rid << dishesInfo;
     if (qry.exec()){
         qDebug()<< "order saved";
