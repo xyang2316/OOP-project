@@ -106,7 +106,7 @@ void Cart::on_deleteButton_clicked()
 
 void Cart::on_pushButton_2_clicked()
 {
-    payment_window = new Payment();
+    payment_window = new Payment(this);
     this->setEnabled(false);
     payment_window->show();
 }

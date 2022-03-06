@@ -25,7 +25,7 @@ private slots:
 private:
     Ui::Dish *ui;
     QWidget *dish_list_window;
-    Cart *cart_window;
+    QWidget *cart_window;
     QSqlRelationalTableModel *property_model;
     int dish_id;
 //    QList<QList<QString>> memory;

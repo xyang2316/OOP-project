@@ -27,7 +27,7 @@
      <string>Pay</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_addBalance">
     <property name="geometry">
      <rect>
       <x>570</x>
@@ -178,6 +178,19 @@
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout"/>
+   </widget>
+   <widget class="QPushButton" name="pushButton_backToCart">
+    <property name="geometry">
+     <rect>
+      <x>40</x>
+      <y>30</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>back to cart</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

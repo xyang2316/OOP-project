@@ -24,8 +24,6 @@ DishList::DishList(QWidget *retaurant_window, int restaurant_id, QWidget *parent
 
 
 
-
-
 //     Create the data model:
 //    dish_model = new QSqlRelationalTableModel(ui->dishListTable);
 //    dish_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
