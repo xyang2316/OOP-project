@@ -21,6 +21,8 @@ Payment::Payment(QWidget *cart_window, int restaurant_id, QWidget *parent) :
     layout->addWidget(sum);
     sumToPay = CartData::GetInstance()->getSumInCart();
     walletBalance = getWalletBalance();
+    inCartStr = CartData::GetInstance()->getInCartStr();
+    CartData::GetInstance()->clearCart();
 }
 
 Payment::~Payment()
@@ -65,6 +67,7 @@ void Payment::on_pushButton_backToCart_clicked()
 
 void Payment::on_pushButton_clicked()
 {
+    //get updated balance
     walletBalance = getWalletBalance();
     if (sumToPay <= walletBalance)
     {
@@ -85,10 +88,10 @@ void Payment::on_pushButton_clicked()
         //insert to order
         QDateTime date = QDateTime::currentDateTime();
         QString formattedTime = date.toString("dd.MM.yyyy hh:mm:ss");
-        QString inCartStr = CartData::GetInstance()->getInCartStr();
         qDebug()<< "incart string"<<inCartStr;
         insertOrder(formattedTime, sumToPay, restaurant_id, inCartStr);
-        CartData::GetInstance()->clearCart();
+        ui->pushButton->setEnabled(false);
+        sumToPay = CartData::GetInstance()->getSumInCart();
     }
     else
     {
@@ -101,19 +104,32 @@ void Payment::on_pushButton_clicked()
 
 void Payment::insertOrder(QString oid, float sumPaid, int rid, QString dishesInfo)
 {
-    //insert to order
     QSqlQuery qry;
-    qry.prepare("INSERT INTO Orders(o_id, paid, r_id, d_info) VALUES(?,?,?,?);");
+    QString restaurant_name;
+    qry.prepare("select r_name from restaurant where r_id =" + QString::number(rid));
+
+    if (qry.exec()){
+        if (qry.next())
+        {
+            restaurant_name = qry.value("r_name").toString();
+            qDebug()<< restaurant_name;
+        }
+    }
+    else{
+        qDebug()<<"can't find restaurant name"<<qry.lastError();
+    }
+
+    qry.prepare("INSERT INTO Orders(o_id, paid, r_name, d_info) VALUES(?,?,?,?);");
     qry.addBindValue(oid);
     qry.addBindValue(sumPaid);
-    qry.addBindValue(rid);
+    qry.addBindValue(restaurant_name);
     qry.addBindValue(dishesInfo);
     qDebug()<<oid <<sumPaid << rid << dishesInfo;
     if (qry.exec()){
         qDebug()<< "order saved";
     }
     else{
-        qDebug()<<"order save fail"<<qry.lastError();
+        qDebug()<<"order can't be saved!"<<qry.lastError();
     }
 }
 

@@ -37,6 +37,7 @@ private:
     double sumToPay;
     double walletBalance;
     int restaurant_id;
+    QString inCartStr;
 };
 
 #endif // PAYMENT_H

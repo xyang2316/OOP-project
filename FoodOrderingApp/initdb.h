@@ -35,16 +35,16 @@ void closeDB();
 //    return q.lastInsertId();
 //}
 
-// newly added
-void addProperty(QSqlQuery &q, const QString &property, const QString &propertyJSON, const QVariant &bookId,
-             const QString propertyType)
-{
-    q.addBindValue(property);
-    q.addBindValue(propertyJSON);
-    q.addBindValue(bookId);
-    q.addBindValue(propertyType);
-    q.exec();
-}
+//// newly added
+//void addProperty(QSqlQuery &q, const QString &property, const QString &propertyJSON, const QVariant &bookId,
+//             const QString propertyType)
+//{
+//    q.addBindValue(property);
+//    q.addBindValue(propertyJSON);
+//    q.addBindValue(bookId);
+//    q.addBindValue(propertyType);
+//    q.exec();
+//}
 
 //QVariant addPropertyType(QSqlQuery &q, const QString &name)
 //{
