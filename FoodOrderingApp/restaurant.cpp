@@ -1,26 +1,28 @@
 #include "restaurant.h"
 #include "ui_restaurant.h"
-#include "initdb.h"
+//#include "initdb.h"
 #include "dishlist.h"
+#include "homepage.h"
 
 #include <QtSql>
 #include <QtWidgets>
 #include <QtCore>
 #include <QtGui>
 
-Restaurant::Restaurant(QWidget *parent)
+Restaurant::Restaurant(QWidget *home_window, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::Restaurant)
 {
+    this->home_window = home_window;
     ui->setupUi(this);
 
-    if (!QSqlDatabase::drivers().contains("QSQLITE")) {return;}
+//    if (!QSqlDatabase::drivers().contains("QSQLITE")) {return;}
 
-    // Initialize the database:
-    QSqlError err = initDb();
-    if (err.type() != QSqlError::NoError) {
-        return;
-    }
+//    // Initialize the database:
+//    QSqlError err = initDb();
+//    if (err.type() != QSqlError::NoError) {
+//        return;
+//    }
 
     this->model = new QSqlQueryModel();
     model->setQuery("Select r_id, r_name from Restaurant");
@@ -70,5 +72,12 @@ void Restaurant::on_pushButton_clicked()
 void Restaurant::on_restaurantTable_clicked(const QModelIndex &index)
 {
 //    qDebug()<<"click"<<index;
+}
+
+
+void Restaurant::on_pushButton_home_clicked()
+{
+    this->home_window->setEnabled(true);
+    this->close();
 }
 

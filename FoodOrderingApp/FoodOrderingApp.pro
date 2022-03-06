@@ -13,6 +13,7 @@ SOURCES += \
     cartdata.cpp \
     dish.cpp \
     dishlist.cpp \
+    homepage.cpp \
     main.cpp \
     payment.cpp \
     restaurant.cpp
@@ -22,6 +23,7 @@ HEADERS += \
     cartdata.h \
     dish.h \
     dishlist.h \
+    homepage.h \
     initdb.h \
     payment.h \
     restaurant.h \
@@ -31,6 +33,7 @@ FORMS += \
     cart.ui \
     dish.ui \
     dishlist.ui \
+    homepage.ui \
     payment.ui \
     restaurant.ui
 

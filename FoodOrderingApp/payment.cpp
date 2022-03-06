@@ -18,23 +18,9 @@ Payment::Payment(QWidget *cart_window, int restaurant_id, QWidget *parent) :
     QString sumDisplay = "Pay: $";
     sumDisplay += QString::number(CartData::GetInstance()->getSumInCart(),'f',2);
     QLabel* sum = new QLabel(sumDisplay);
-
-    //get balance from DB
-    QSqlQuery query("SELECT * FROM wallet where w_id = 1");//hard coded for now
-    double accountbalance = query.record().indexOf("balance");
-    double bValue=0.0;
-    if (query.next())
-    {
-       bValue = query.value(accountbalance).toFloat();
-       qDebug() << bValue;
-    }
-//    QString balanceDisplay = "wallet: $";
-//    balanceDisplay += QString::number(bValue);
-//    QLabel* balance = new QLabel(balanceDisplay);
     layout->addWidget(sum);
-//    layout->addWidget(balance);
     sumToPay = CartData::GetInstance()->getSumInCart();
-    walletBalance = bValue;
+    walletBalance = getWalletBalance();
     CartData::GetInstance()->clearCart();
 }
 
@@ -82,25 +68,24 @@ void Payment::on_pushButton_clicked()
 {
     if (sumToPay <= walletBalance)
     {
-            QMessageBox msg;
-            msg.setText(QStringLiteral("We got your order!"));
-            msg.setWindowTitle(QStringLiteral("Payment success！"));
-            msg.exec();
-            double newBalance = walletBalance - sumToPay;
-            QString newBalanceStr = QString::number(newBalance);
-            QSqlQuery qry;
-            qry.prepare("update Wallet SET balance='"+ newBalanceStr +"' where w_id = 1");//hard code
-            if (qry.exec()){
-                qDebug()<< "order success: new balance"<<newBalanceStr;
-            }
-            else{
-                qDebug()<<"order fail"<<qry.lastError();
-            }
-            //insert to order
-            QDateTime date = QDateTime::currentDateTime();
-            QString formattedTime = date.toString("dd.MM.yyyy hh:mm:ss");
-            insertOrder(formattedTime, sumToPay, restaurant_id, "xxxx");//TODOdishes
-
+        QMessageBox msg;
+        msg.setText(QStringLiteral("We got your order!"));
+        msg.setWindowTitle(QStringLiteral("Payment success！"));
+        msg.exec();
+        double newBalance = walletBalance - sumToPay;
+        QString newBalanceStr = QString::number(newBalance);
+        QSqlQuery qry;
+        qry.prepare("update Wallet SET balance='"+ newBalanceStr +"' where w_id = 1");//hard code
+        if (qry.exec()){
+            qDebug()<< "order success: new balance"<<newBalanceStr;
+        }
+        else{
+            qDebug()<<"order fail"<<qry.lastError();
+        }
+        //insert to order
+        QDateTime date = QDateTime::currentDateTime();
+        QString formattedTime = date.toString("dd.MM.yyyy hh:mm:ss");
+        insertOrder(formattedTime, sumToPay, restaurant_id, "xxxx");//TODOdishes
     }
     else
     {
@@ -130,17 +115,10 @@ void Payment::insertOrder(QString oid, float sumPaid, int rid, QString dishesInf
 }
 
 
-void Payment::on_pushButton_2_clicked()
+void Payment::on_pushButton_checkBalance_clicked()
 {
     QString balanceDisplay = "Your Balance: $";
-    QSqlQuery query("SELECT * FROM wallet where w_id = 1");
-    double accountbalance = query.record().indexOf("balance");
-    double bValue=0.0;
-    if (query.next())
-    {
-       bValue = query.value(accountbalance).toFloat();
-       qDebug() << bValue;
-    }
+    float bValue = getWalletBalance();
     QString bValueStr = QString::number(bValue);
     balanceDisplay += bValueStr;
     walletBalance = bValue;
@@ -150,4 +128,20 @@ void Payment::on_pushButton_2_clicked()
     msg.setWindowTitle(QStringLiteral("Check balance"));
     msg.exec();
 }
+
+float Payment::getWalletBalance()
+{
+    QSqlQuery query("SELECT * FROM wallet where w_id = 1");
+    double accountbalance = query.record().indexOf("balance");
+    double bValue=-1.0;
+    if (query.next())
+    {
+       bValue = query.value(accountbalance).toFloat();
+       walletBalance = bValue;
+       qDebug() << bValue;
+    }
+    return walletBalance;
+}
+
+
 

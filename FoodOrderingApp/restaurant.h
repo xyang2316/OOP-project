@@ -14,15 +14,15 @@ class Restaurant : public QMainWindow
     Q_OBJECT
     friend class DishList;
 public:
-    Restaurant(QWidget *parent = nullptr);
+    Restaurant(QWidget *home_window, QWidget *parent = nullptr);
     ~Restaurant();
-    //for debug
-    QSqlDatabase mydb;
 
 private slots:
     void on_pushButton_clicked();
 
     void on_restaurantTable_clicked(const QModelIndex &index);
+
+    void on_pushButton_home_clicked();
 
 private:
     Ui::Restaurant *ui;
@@ -30,5 +30,6 @@ private:
     DishList *dish_list_window;
     QSqlQueryModel  *model;
 //    QSqlTableModel  *model;
+    QWidget *home_window;
 };
 #endif // RESTAURANT_H

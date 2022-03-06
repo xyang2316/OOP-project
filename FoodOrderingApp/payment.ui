@@ -100,7 +100,7 @@
      <string>back to cart</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_checkBalance">
     <property name="geometry">
      <rect>
       <x>440</x>
