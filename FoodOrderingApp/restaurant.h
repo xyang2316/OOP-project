@@ -16,6 +16,8 @@ class Restaurant : public QMainWindow
 public:
     Restaurant(QWidget *parent = nullptr);
     ~Restaurant();
+    //for debug
+    QSqlDatabase mydb;
 
 private slots:
     void on_pushButton_clicked();

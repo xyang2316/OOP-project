@@ -2,6 +2,7 @@
 #define PAYMENT_H
 #include <QMainWindow>
 #include "cart.h"
+//#include "initdb.h"
 
 namespace Ui {
 class Payment;

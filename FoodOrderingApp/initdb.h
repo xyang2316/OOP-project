@@ -1,10 +1,10 @@
-
 #ifndef INITDB_H
 #define INITDB_H
 
 #include <QtSql>
 #include <QList>
 #include <QMessageBox>
+
 QSqlDatabase db;
 //QSqlError createDBConnection();
 void closeDB();
@@ -108,6 +108,13 @@ void closeDB()
     db.close();
     db.removeDatabase(QSqlDatabase::defaultConnection);
 }
+
+bool isDBOpen()
+{
+    if(db.open()) return true;
+    return false;
+}
+
 QSqlError initDb()
 {
     qDebug()<<"init";
@@ -116,7 +123,7 @@ QSqlError initDb()
 
     if (!db.open())
         return db.lastError();
-    qDebug()  <<  "drive" << QSqlDatabase::drivers();
+    qDebug()  << "drive" << QSqlDatabase::drivers();
     qDebug()<< "end" << db.databaseName();
 
 //    QStringList tables = db.tables();

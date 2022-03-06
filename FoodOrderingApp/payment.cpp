@@ -56,7 +56,13 @@ void Payment::on_pushButton_addBalance_clicked()
     QSqlQuery qry;
     double newBalance = walletBalance + refillAmount.toDouble();
     QString newBalanceStr = QString::number(newBalance);
-    QSqlQuery query("update Wallet SET balance="+ newBalanceStr +"where w_id =" + walletId);
+    qry.prepare("update Wallet SET balance='"+ newBalanceStr +"' where w_id = '" + walletId+"'");
+    if (qry.exec()){
+        qDebug()<< "add$ success: new balance"<<newBalanceStr;
+    }
+    else{
+        qDebug()<<"add$ fail"<<qry.lastError();
+    }
     qDebug()<< "new amount"<<newBalanceStr;
 
 //    if (qry.exec("select balance from wallet where wid='"+ walletId +"'"))
@@ -97,23 +103,30 @@ void Payment::on_pushButton_clicked()
     //        update db with new balance
     //    else:
     //        display a message box to remind user add money.
-        if (sumToPay <= walletBalance)
-        {
+    if (sumToPay <= walletBalance)
+    {
             QMessageBox msg;
             msg.setText(QStringLiteral("We got your order!"));
             msg.setWindowTitle(QStringLiteral("Payment success！"));
             msg.exec();
             double newBalance = walletBalance - sumToPay;
             QString newBalanceStr = QString::number(newBalance);
-            QSqlQuery query("update Wallet SET balance="+ newBalanceStr +"where w_id = 1");
-            qDebug()<< "order success: new balance"<<newBalanceStr;
-        }
-        else
-        {
-            QMessageBox msg;
-            msg.setText(QStringLiteral("Your wallet balance is low, Please add."));
-            msg.setWindowTitle(QStringLiteral("Payment fail！"));
-            msg.exec();
-        }
+            QSqlQuery qry;
+            qry.prepare("update Wallet SET balance='"+ newBalanceStr +"' where w_id = 1");
+            if (qry.exec()){
+                qDebug()<< "order success: new balance"<<newBalanceStr;
+            }
+            else{
+                qDebug()<<"order fail"<<qry.lastError();
+            }
+
+    }
+    else
+    {
+        QMessageBox msg;
+        msg.setText(QStringLiteral("Your wallet balance is low, Please add."));
+        msg.setWindowTitle(QStringLiteral("Payment fail！"));
+        msg.exec();
+    }
 }
 

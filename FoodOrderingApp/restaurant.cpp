@@ -21,7 +21,9 @@ Restaurant::Restaurant(QWidget *parent)
     if (err.type() != QSqlError::NoError) {
         return;
     }
-
+    //for debug
+    mydb = db;
+    //
     this->model = new QSqlQueryModel();
     model->setQuery("Select r_id, r_name from Restaurant");
     ui->restaurantTable->setModel(model);
