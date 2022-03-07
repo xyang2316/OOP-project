@@ -6,14 +6,12 @@
 #include <QLabel>
 #include <QtSql>
 #include <QMessageBox>
-//extern bool backToHome;//
 
 
 Payment::Payment(QWidget *cart_window, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Payment)
 {
-//    global::cart_window = cart_window;//
     this->cart_window = cart_window;
     this->restaurant_id = restaurant_id;
     ui->setupUi(this);
@@ -171,12 +169,8 @@ float Payment::getWalletBalance()
 
 void Payment::on_pushButton_home_clicked()
 {
-    //TODO
     this->close();
     cart_window->close();
-//    backToHome = true;
-//    dish_list_window_global->close();
-//    retaurant_window_global->close();
     CartData::GetInstance()->clearCart();
 }
 

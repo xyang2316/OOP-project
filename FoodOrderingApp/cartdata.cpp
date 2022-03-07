@@ -44,8 +44,6 @@ QString CartData::getInCartStr() {
     return inCartStr;
 }
 
-
-
 void CartData::addDish(int dishId, QString& dishName, double dishPrice) {
     QList<QPair<QString, double>> tempDish;
     priceList.push_back(QPair<int, double>(dishId, dishPrice));
@@ -71,15 +69,8 @@ QPair<int, QPair<QString, double>> CartData::removeDishFromCart(int index){
     return temp;
 }
 
-//void Cart::updateDishInCart(int index, QMap<QString, double>& newProperties, double tempSum) {
-//    QMap<QString, double> temp = removeDishFromCart(index);
-//    addDishToCart(temp.begin());
-//    addPropertiesToCart(newProperties, tempSum);
-//}
 void CartData::clearCart(){
     inCart.clear();
     priceList.clear();
     sumInCart = 0;
 }
-
-//removeLast()

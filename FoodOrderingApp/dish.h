@@ -19,7 +19,6 @@ public:
 
 private slots:
     void on_goBackButton_clicked();
-//    bool calculate(double rightOperand, const QString &pendingOperator);
     void on_confirmButton_clicked();
 
 private:
@@ -27,9 +26,7 @@ private:
     QWidget *dish_list_window;
     QWidget *cart_window;
     QSqlRelationalTableModel *property_model;
-//    QSqlQueryModel *property_model;
     int dish_id;
-//    QList<QList<QString>> memory;
     double dishSum;
     int restaurant_id;
 };

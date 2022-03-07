@@ -10,7 +10,6 @@
 #include <QLabel>
 #include "payment.h"
 
-
 Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Cart)
@@ -20,16 +19,9 @@ Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
     ui->setupUi(this);
 
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());
-
-//    layout->addStretch();
-//    layout->setDirection(QVBoxLayout::TopToBottom);
-
     QGroupBox *groupbox = new QGroupBox(tr("Order Summary:"));
     layout->addWidget(groupbox);
-//        layout->setDirection(QVBoxLayout::TopToBottom);
-//    QList<QString>
     QVBoxLayout *vbox = new QVBoxLayout;
-//    qDebug() << CartData::GetInstance()->getCart().size();
     for(int i = 0; i < CartData::GetInstance()->getCart().size(); i++) {
         QList<QPair<QString, double>> sdish = CartData::GetInstance()->getCart().at(i);
         QString dishName = sdish.at(0).first;
@@ -43,9 +35,7 @@ Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
         QLabel* label = new QLabel(sprops);
         vbox->addWidget(radiobutton);
         vbox->addWidget(label);
-//        qDebug() << label->text();
     }
-
     groupbox->setLayout(vbox);
     QString sumDisplay = "Total: $";
     sumDisplay += QString::number(CartData::GetInstance()->getSumInCart(),'f',2);
@@ -70,8 +60,6 @@ void Cart::on_updateDishButton_clicked()
     int dishIndex = NULL;
     for(int i = 0; i < allButtons.size(); ++i){
         if(allButtons.at(i)->isChecked()) {
-//            QList tempProp = allButtons.at(i)->text().split(QLatin1String(" : $ "));
-//            choices.push_back(QPair<QString, double>(title.append(" : ").append(tempProp[0]), tempProp[1].toDouble()));
             dishIndex = i;
         }
     }
@@ -83,8 +71,6 @@ void Cart::on_updateDishButton_clicked()
     Dish* newDish_window = new Dish(this, dishId, dishPrice, restaurant_id);
     newDish_window->show();
     this->close();
-
-
 }
 
 void Cart::on_deleteButton_clicked()
@@ -102,9 +88,7 @@ void Cart::on_deleteButton_clicked()
 
     this->dish_list_window->setEnabled(true);
     this->close();
-
 }
-
 
 void Cart::on_pushButton_2_clicked()
 {

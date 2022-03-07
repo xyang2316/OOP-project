@@ -39,14 +39,14 @@
     <item>
      <widget class="QPushButton" name="pushButton_addBalance">
       <property name="text">
-       <string>add balance</string>
+       <string>Add Balance</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_orderHistory">
       <property name="text">
-       <string>order history</string>
+       <string>Order History</string>
       </property>
      </widget>
     </item>
@@ -56,14 +56,14 @@
        <bool>true</bool>
       </property>
       <property name="text">
-       <string>check balance</string>
+       <string>Check Balance</string>
       </property>
      </widget>
     </item>
     <item>
      <widget class="QPushButton" name="pushButton_orderNow">
       <property name="text">
-       <string>order now</string>
+       <string>Order Now</string>
       </property>
      </widget>
     </item>

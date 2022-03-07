@@ -37,7 +37,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>add balance</string>
+     <string>Add Balance</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
@@ -62,7 +62,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>top up amount:</string>
+      <string>Top up amount:</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_payAmount">
@@ -97,7 +97,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>back to cart</string>
+     <string>Back to cart</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_checkBalance">
@@ -134,7 +134,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Home</string>
+     <string>Menu</string>
     </property>
    </widget>
   </widget>

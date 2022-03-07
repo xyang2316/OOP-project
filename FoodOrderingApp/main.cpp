@@ -1,5 +1,3 @@
-//#include "restaurant.h"
-#include "cartdata.h"
 #include <QApplication>
 #include "homepage.h"
 
