@@ -3,18 +3,27 @@
 #include "dish.h"
 #include "cart.h"
 #include "cartdata.h"
-
+#include "global.h"
 #include <string>
 #include <QString>
-//#include <QtSql>
-//#include <QtWidgets>
+
+//extern bool backToHome;//
 
 DishList::DishList(QWidget *retaurant_window, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DishList)
 {
+//    retaurant_window_global = retaurant_window;//
+//    dish_list_window_global = this;//
     this->retaurant_window = retaurant_window;
     ui->setupUi(this);
+//    //
+//    if (backToHome){
+//        this->retaurant_window->setEnabled(true);
+//        this->close();
+//    }
+    //
+
     this->restaurant_id = restaurant_id;
 
     this->dish_model = new QSqlQueryModel();

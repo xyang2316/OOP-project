@@ -2,6 +2,7 @@
 #include "ui_cart.h"
 #include "dish.h"
 #include "cartdata.h"
+#include "global.h"
 #include <QList>
 #include <QRadioButton>
 #include <QGroupBox>

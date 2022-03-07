@@ -23,6 +23,7 @@ HEADERS += \
     cartdata.h \
     dish.h \
     dishlist.h \
+    global.h \
     homepage.h \
     initdb.h \
     payment.h \

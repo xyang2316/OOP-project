@@ -26,10 +26,8 @@ private slots:
 
 private:
     Ui::Restaurant *ui;
-//    QSqlRelationalTableModel *model;
     DishList *dish_list_window;
     QSqlQueryModel  *model;
-//    QSqlTableModel  *model;
     QWidget *home_window;
 };
 #endif // RESTAURANT_H

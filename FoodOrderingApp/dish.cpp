@@ -2,6 +2,7 @@
 #include "ui_dish.h"
 #include "cart.h"
 #include "cartdata.h"
+#include "global.h"
 #include <string>
 #include <QString>
 #include <iostream>
@@ -15,6 +16,7 @@ Dish::Dish(QWidget *dish_list_window, int dish_id, double dish_price, int restau
     QMainWindow(parent),
     ui(new Ui::Dish)
 {
+//    dish_list_window_global = dish_list_window;//
     this->dish_list_window = dish_list_window;
     this->restaurant_id = restaurant_id;
     ui->setupUi(this);

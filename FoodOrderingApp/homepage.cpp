@@ -1,14 +1,18 @@
 #include "homepage.h"
 #include "ui_homepage.h"
 #include "initdb.h"
+#include "global.h"
 #include "payment.h"
 #include <QMessageBox>
 #include <QInputDialog>
+//extern bool backToHome;//
+
 
 HomePage::HomePage(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::HomePage)
 {
+//    backToHome = false;//
     ui->setupUi(this);
     if (!QSqlDatabase::drivers().contains("QSQLITE")) {return;}
 
