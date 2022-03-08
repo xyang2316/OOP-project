@@ -13,6 +13,7 @@ SOURCES += \
     cartdata.cpp \
     dish.cpp \
     dishlist.cpp \
+    global.cpp \
     homepage.cpp \
     main.cpp \
     numberformatdelegate.cpp \
@@ -25,12 +26,12 @@ HEADERS += \
     cartdata.h \
     dish.h \
     dishlist.h \
+    global.h \
     homepage.h \
     initdb.h \
     numberformatdelegate.h \
     payment.h \
-    restaurant.h \
-    typedef.h
+    restaurant.h
 
 FORMS += \
     cart.ui \

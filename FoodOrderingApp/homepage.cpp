@@ -40,7 +40,7 @@ void HomePage::on_pushButton_checkBalance_clicked()
     QString balanceDisplay = "Your Balance: $";
     QSqlQuery query("SELECT * FROM wallet where w_id = 1");
     double accountbalance = query.record().indexOf("balance");
-    double bValue=0.0;
+    double bValue= 0.0;
     if (query.next())
     {
        bValue = query.value(accountbalance).toFloat();
@@ -64,7 +64,7 @@ void HomePage::on_pushButton_addBalance_clicked()
     QSqlQuery qry;
     QSqlQuery query("SELECT * FROM wallet where w_id = 1");
     double accountbalance = query.record().indexOf("balance");
-    double wBalance=-1.0;
+    double wBalance= -1.0;
     if (query.next())
     {
        wBalance = query.value(accountbalance).toFloat();

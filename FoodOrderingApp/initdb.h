@@ -4,14 +4,14 @@
 #include <QtSql>
 #include <QList>
 #include <QMessageBox>
+#include "global.h"
 
 QSqlDatabase db;
 QSqlError initDb()
 {
     qDebug()<<"init";
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    //please change to your local path to the DB
-    db.setDatabaseName("/Users/yangxueying/Desktop/OOP-project/QtDB.db");
+    db.setDatabaseName(Global::homePath  + "/QtDB.db");
 
     if (!db.open())
         return db.lastError();
