@@ -2,7 +2,6 @@
 #define PAYMENT_H
 #include <QMainWindow>
 #include "cart.h"
-//#include "initdb.h"
 
 namespace Ui {
 class Payment;
@@ -17,13 +16,9 @@ public:
     ~Payment();
 
 private slots:
-
     void on_pushButton_addBalance_clicked();
-
     void on_pushButton_backToCart_clicked();
-
     void on_pushButton_clicked();
-
     void on_pushButton_checkBalance_clicked();
     void insertOrder(QString oid, float sumPaid, int rid, QString dishesInfo);
     void on_pushButton_home_clicked();

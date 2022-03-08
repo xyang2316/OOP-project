@@ -17,11 +17,8 @@ public:
 
 private slots:
     void on_pushButton_orderNow_clicked();
-
     void on_pushButton_checkBalance_clicked();
-
     void on_pushButton_addBalance_clicked();
-
     void on_pushButton_orderHistory_clicked();
 
 private:

@@ -81,5 +81,3 @@ void CartData::clearCart(){
     priceList.clear();
     sumInCart = 0;
 }
-
-//removeLast()

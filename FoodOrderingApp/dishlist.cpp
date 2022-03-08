@@ -3,68 +3,31 @@
 #include "dish.h"
 #include "cart.h"
 #include "cartdata.h"
-#include "global.h"
 #include <string>
 #include <QString>
 
-//extern bool backToHome;//
-
-//DishList::DishList(QWidget *retaurant_window, int restaurant_id, QWidget *parent) :
 DishList::DishList(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::DishList)
 {
-//    retaurant_window_global = retaurant_window;//
-//    dish_list_window_global = this;//
-
-//    this->retaurant_window = retaurant_window;
-    ////trial
     this->pointerStack = pointerStack;
     this->retaurant_window = pointerStack["Restaurant"];
-
     ui->setupUi(this);
-//    //
-//    if (backToHome){
-//        this->retaurant_window->setEnabled(true);
-//        this->close();
-//    }
-    //
-
     this->restaurant_id = restaurant_id;
-
     this->dish_model = new QSqlQueryModel();
-    dish_model->setQuery("Select * from Dish where r_id =" + QString::number(restaurant_id));
+    dish_model->setQuery("Select dish_id, dish_name, price, d_type from Dish where r_id =" + QString::number(restaurant_id));
     qDebug()<<"rid"<<QString::number(restaurant_id);
+
+    dish_model->setHeaderData(1, Qt::Horizontal, tr("Dish Name"));
+    dish_model->setHeaderData(2, Qt::Horizontal, tr("Price"));
+    dish_model->setHeaderData(3, Qt::Horizontal, tr("Dish Type"));
     ui->dishListTable->setModel(dish_model);
 
+    ui->dishListTable->setColumnWidth(1, 280);
+    ui->dishListTable->setColumnWidth(2, 50);
+    ui->dishListTable->setColumnWidth(3, 100);
+    ui->dishListTable->setColumnHidden(0, true);
 
-
-
-//     Create the data model:
-//    dish_model = new QSqlRelationalTableModel(ui->dishListTable);
-//    dish_model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-//    dish_model->setTable("books");
-
-    // Set the relations to the other database tables:
-//    dish_model->setRelation(dish_model->fieldIndex("author"), QSqlRelation("authors", "id", "name"));
-//    dish_model->setRelation(dish_model->fieldIndex("genre"), QSqlRelation("genres", "id", "name"));
-
-//    dish_model->setHeaderData(dish_model->fieldIndex("genre"), Qt::Horizontal, tr("Genre"));
-//    dish_model->setHeaderData(dish_model->fieldIndex("title"),
-//                         Qt::Horizontal, tr("Title"));
-//    dish_model->setHeaderData(dish_model->fieldIndex("price"), Qt::Horizontal, tr("Price"));
-//    dish_model->setHeaderData(dish_model->fieldIndex("rating"),
-//                         Qt::Horizontal, tr("Rating"));
-
-    // Populate the model:
-//    std::string query = "author = " + std::to_string(restaurant_id);
-//    dish_model->setFilter(query.c_str());
-//    if (!dish_model->select()) {
-//        return;
-//    }
-//    // Set the model and hide the ID column:
-//    ui->dishListTable->setModel(dish_model);
-//    ui->dishListTable->setColumnHidden(dish_model->fieldIndex("id"), true);
     ui->dishListTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->dishListTable->setCurrentIndex(dish_model->index(0, 0));
 
@@ -93,8 +56,6 @@ void DishList::on_updateDishButton_clicked()
     qDebug() << CartData::GetInstance()->getPriceList();
     qDebug() << CartData::GetInstance()->getCart();
 
-//    dish_window=new Dish(this, selected_dish_id, selected_dish_price, restaurant_id);
-    ////trial
     pointerStack["Menu"] = this;
     dish_window=new Dish(pointerStack, selected_dish_id, selected_dish_price, restaurant_id);
 
@@ -107,7 +68,6 @@ void DishList::on_viewCartButton_clicked()
     cart_window = new Cart(pointerStack, restaurant_id);
     this->setEnabled(false);
     cart_window->show();
-
 }
 
 

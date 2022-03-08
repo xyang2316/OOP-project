@@ -14,16 +14,12 @@ class Restaurant : public QMainWindow
     Q_OBJECT
     friend class DishList;
 public:
-//    Restaurant(QWidget*, QWidget *parent = nullptr);
-    ////trial
     Restaurant(QMap<QString, QWidget*>, QWidget *parent = nullptr);
     ~Restaurant();
 
 private slots:
     void on_pushButton_clicked();
-
     void on_restaurantTable_clicked(const QModelIndex &index);
-
     void on_pushButton_home_clicked();
 
 private:

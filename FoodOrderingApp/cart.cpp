@@ -2,7 +2,6 @@
 #include "ui_cart.h"
 #include "dish.h"
 #include "cartdata.h"
-#include "global.h"
 #include <QList>
 #include <QRadioButton>
 #include <QGroupBox>
@@ -10,8 +9,6 @@
 #include <QLabel>
 #include "payment.h"
 
-
-//Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
 Cart::Cart(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *parent) :
 
     QMainWindow(parent),
@@ -23,16 +20,9 @@ Cart::Cart(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *par
     ui->setupUi(this);
 
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());
-
-//    layout->addStretch();
-//    layout->setDirection(QVBoxLayout::TopToBottom);
-
     QGroupBox *groupbox = new QGroupBox(tr("Order Summary:"));
     layout->addWidget(groupbox);
-//        layout->setDirection(QVBoxLayout::TopToBottom);
-//    QList<QString>
     QVBoxLayout *vbox = new QVBoxLayout;
-//    qDebug() << CartData::GetInstance()->getCart().size();
     for(int i = 0; i < CartData::GetInstance()->getCart().size(); i++) {
         QList<QPair<QString, double>> sdish = CartData::GetInstance()->getCart().at(i);
         QString dishName = sdish.at(0).first;
@@ -46,7 +36,6 @@ Cart::Cart(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *par
         QLabel* label = new QLabel(sprops);
         vbox->addWidget(radiobutton);
         vbox->addWidget(label);
-//        qDebug() << label->text();
     }
 
     groupbox->setLayout(vbox);
@@ -73,8 +62,6 @@ void Cart::on_updateDishButton_clicked()
     int dishIndex = NULL;
     for(int i = 0; i < allButtons.size(); ++i){
         if(allButtons.at(i)->isChecked()) {
-//            QList tempProp = allButtons.at(i)->text().split(QLatin1String(" : $ "));
-//            choices.push_back(QPair<QString, double>(title.append(" : ").append(tempProp[0]), tempProp[1].toDouble()));
             dishIndex = i;
         }
     }
@@ -87,8 +74,6 @@ void Cart::on_updateDishButton_clicked()
     Dish* newDish_window = new Dish(pointerStack, dishId, dishPrice, restaurant_id);
     newDish_window->show();
     this->close();
-
-
 }
 
 void Cart::on_deleteButton_clicked()
@@ -106,9 +91,7 @@ void Cart::on_deleteButton_clicked()
 
     this->dish_list_window->setEnabled(true);
     this->close();
-
 }
-
 
 void Cart::on_pushButton_2_clicked()
 {

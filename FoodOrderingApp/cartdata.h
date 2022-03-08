@@ -21,9 +21,6 @@ public:
     QPair<int, QPair<QString, double>> removeDishFromCart(int);
     void clearCart();
 
-
-
-
 //    ~Cart();
 protected:
     CartData();
@@ -32,7 +29,6 @@ protected:
     QList<QList<QPair<QString, double>>> inCart;
     QList<QPair<int, double>> priceList;
     QString inCartStr;
-
 };
 
 #endif // CARTDATA_H

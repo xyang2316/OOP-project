@@ -13,8 +13,6 @@ class Cart : public QMainWindow
 {
     Q_OBJECT
 public:
-//    explicit Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent = nullptr);
-
     explicit Cart(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *parent = nullptr);
     ~Cart();
 
@@ -30,7 +28,6 @@ private slots:
     void on_goBackButton_clicked();
     void on_updateDishButton_clicked();
     void on_deleteButton_clicked();
-
     void on_pushButton_2_clicked();
 
 private:

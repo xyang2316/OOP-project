@@ -1,19 +1,15 @@
 #include "payment.h"
 #include "ui_payment.h"
-#include "global.h"
 #include <QGroupBox>
 #include "cartdata.h"
 #include <QLabel>
 #include <QtSql>
 #include <QMessageBox>
-//extern bool backToHome;//
-
 
 Payment::Payment(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Payment)
 {
-//    global::cart_window = cart_window;//
     this->pointerStack = pointerStack;
     this->cart_window = pointerStack["Cart"];
     this->restaurant_id = restaurant_id;
@@ -28,7 +24,6 @@ Payment::Payment(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidge
     sumToPay = CartData::GetInstance()->getSumInCart();
     walletBalance = getWalletBalance();
     inCartStr = CartData::GetInstance()->getInCartStr();
-//    CartData::GetInstance()->clearCart();
 }
 
 Payment::~Payment()
@@ -62,8 +57,6 @@ void Payment::on_pushButton_addBalance_clicked()
     qDebug()<< "new amount"<<newBalanceStr;
 }
 
-
-
 void Payment::on_pushButton_backToCart_clicked()
 {
     qDebug() << CartData::GetInstance()->getInCartStr();
@@ -72,7 +65,6 @@ void Payment::on_pushButton_backToCart_clicked()
     this->cart_window->setEnabled(true);
     this->close();
 }
-
 
 void Payment::on_pushButton_clicked()
 {
@@ -181,21 +173,14 @@ float Payment::getWalletBalance()
     return walletBalance;
 }
 
-
-
-
 void Payment::on_pushButton_home_clicked()
 {
-    //TODO
     this->close();
     cart_window->close();
     pointerStack["Dish"]->close();
     pointerStack["Menu"]->close();
     pointerStack["Restaurant"]->close();
     pointerStack["Homepage"]->setEnabled(true);
-//    backToHome = true;
-//    dish_list_window_global->close();
-//    retaurant_window_global->close();
     CartData::GetInstance()->clearCart();
 }
 

@@ -1,18 +1,14 @@
 #include "homepage.h"
 #include "ui_homepage.h"
 #include "initdb.h"
-#include "global.h"
 #include "payment.h"
 #include <QMessageBox>
 #include <QInputDialog>
-//extern bool backToHome;//
-
 
 HomePage::HomePage(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::HomePage)
 {
-//    backToHome = false;//
     ui->setupUi(this);
     if (!QSqlDatabase::drivers().contains("QSQLITE")) {return;}
 
@@ -30,17 +26,13 @@ HomePage::~HomePage()
 
 void HomePage::on_pushButton_orderNow_clicked()
 {   
-//    restaurant_window = new Restaurant(this);
-    //// trial
     QMap<QString, QWidget*> pointerStack;
     pointerStack["Homepage"] = this;
     restaurant_window = new Restaurant(pointerStack);
 
-
     this->setEnabled(false);
     restaurant_window->show();
 }
-
 
 void HomePage::on_pushButton_checkBalance_clicked()
 {
@@ -62,7 +54,6 @@ void HomePage::on_pushButton_checkBalance_clicked()
     msg.exec();
 }
 
-
 void HomePage::on_pushButton_addBalance_clicked()
 {
     QInputDialog dialog;
@@ -82,9 +73,8 @@ void HomePage::on_pushButton_addBalance_clicked()
     QString newValueStr = QString::number(newValue);
     qry.prepare("update Wallet SET balance='"+ newValueStr +"' where w_id = 1");
     if (qry.exec()){
-        qDebug()<< "add$ success: new balance"<<newValueStr;
         QMessageBox msg;
-        msg.setText("Successfully added." + topupValueStr + " to your e-wallet!");
+        msg.setText("Successfully added $" + topupValueStr + " to your e-wallet!");
         msg.setWindowTitle(QStringLiteral("Payment success！"));
         msg.exec();
     }
@@ -95,14 +85,23 @@ void HomePage::on_pushButton_addBalance_clicked()
         msg.setWindowTitle(QStringLiteral("Payment failed！"));
         msg.exec();
     }
-    qDebug()<< "new amount"<<newValueStr;
+    qDebug()<< "new amount in wallet"<<newValueStr;
 }
-
 
 void HomePage::on_pushButton_orderHistory_clicked()
 {
     this->model = new QSqlQueryModel();
     model->setQuery("Select * from Orders ORDER BY o_id DESC");
+
+    model->setHeaderData(0, Qt::Horizontal, tr("Order date"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Order total"));
+    model->setHeaderData(2, Qt::Horizontal, tr("Restaurant"));
+    model->setHeaderData(3, Qt::Horizontal, tr("Order detail"));
     ui->tableViewOrders->setModel(model);
+
+    ui->tableViewOrders->setColumnWidth(0, 150);
+    ui->tableViewOrders->setColumnWidth(1, 100);
+    ui->tableViewOrders->setColumnWidth(2, 150);
+    ui->tableViewOrders->setColumnWidth(3, 300);
 }
 
