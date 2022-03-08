@@ -13,7 +13,9 @@ class Cart : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent = nullptr);
+//    explicit Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent = nullptr);
+
+    explicit Cart(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *parent = nullptr);
     ~Cart();
 
 //    FUNCTIONS go to singleton:
@@ -36,6 +38,50 @@ private:
     QWidget *dish_list_window;
     QWidget *payment_window;
     int restaurant_id;
+    QMap<QString, QWidget*> pointerStack;
 };
 
 #endif // CART_H
+
+
+
+
+//#include <iostream>
+//#include <thread>
+//#include <QString>
+// //using namespace std;
+
+//class Cart
+//{
+//protected:
+//    Cart(int value): value_(value){}
+//    static Cart* cart_;
+//    int value_;
+
+//public:
+//    Cart(Cart &other) = delete;
+//    void operator=(const Cart &) = delete;
+//    static Cart *GetInstance(int);
+//    void SomeBusinessLogic(){
+//        // ...
+//    }
+//    int value() const{ return value_; }
+//};
+
+//Cart* Cart::cart_= nullptr;;
+//Cart *Cart::GetInstance(int value)
+//{
+//    if(cart_==nullptr){
+//        cart_ = new Cart(value);
+//    }
+//    return cart_;
+//}
+
+
+//dish name        total :
+//    - size, protein...
+//    - addon:...
+
+//outer list : cart
+//     inner list : dish
+//            pair : attribute, price

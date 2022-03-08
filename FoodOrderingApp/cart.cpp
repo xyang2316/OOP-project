@@ -10,18 +10,29 @@
 #include <QLabel>
 #include "payment.h"
 
-Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
+
+//Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
+Cart::Cart(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *parent) :
+
     QMainWindow(parent),
     ui(new Ui::Cart)
 {
-    this->dish_list_window = dish_list_window;
+    this->pointerStack = pointerStack;
+    this->dish_list_window = pointerStack["Menu"];
     this->restaurant_id = restaurant_id;
     ui->setupUi(this);
 
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());
+
+//    layout->addStretch();
+//    layout->setDirection(QVBoxLayout::TopToBottom);
+
     QGroupBox *groupbox = new QGroupBox(tr("Order Summary:"));
     layout->addWidget(groupbox);
+//        layout->setDirection(QVBoxLayout::TopToBottom);
+//    QList<QString>
     QVBoxLayout *vbox = new QVBoxLayout;
+//    qDebug() << CartData::GetInstance()->getCart().size();
     for(int i = 0; i < CartData::GetInstance()->getCart().size(); i++) {
         QList<QPair<QString, double>> sdish = CartData::GetInstance()->getCart().at(i);
         QString dishName = sdish.at(0).first;
@@ -35,7 +46,9 @@ Cart::Cart(QWidget *dish_list_window, int restaurant_id, QWidget *parent) :
         QLabel* label = new QLabel(sprops);
         vbox->addWidget(radiobutton);
         vbox->addWidget(label);
+//        qDebug() << label->text();
     }
+
     groupbox->setLayout(vbox);
     QString sumDisplay = "Total: $";
     sumDisplay += QString::number(CartData::GetInstance()->getSumInCart(),'f',2);
@@ -60,6 +73,8 @@ void Cart::on_updateDishButton_clicked()
     int dishIndex = NULL;
     for(int i = 0; i < allButtons.size(); ++i){
         if(allButtons.at(i)->isChecked()) {
+//            QList tempProp = allButtons.at(i)->text().split(QLatin1String(" : $ "));
+//            choices.push_back(QPair<QString, double>(title.append(" : ").append(tempProp[0]), tempProp[1].toDouble()));
             dishIndex = i;
         }
     }
@@ -68,9 +83,12 @@ void Cart::on_updateDishButton_clicked()
     QString dishName = temp.second.first;
     double dishPrice = temp.second.second;
     CartData::GetInstance()->addDish(dishId,dishName, dishPrice);
-    Dish* newDish_window = new Dish(this, dishId, dishPrice, restaurant_id);
+    pointerStack["Cart"] = this;
+    Dish* newDish_window = new Dish(pointerStack, dishId, dishPrice, restaurant_id);
     newDish_window->show();
     this->close();
+
+
 }
 
 void Cart::on_deleteButton_clicked()
@@ -88,11 +106,16 @@ void Cart::on_deleteButton_clicked()
 
     this->dish_list_window->setEnabled(true);
     this->close();
+
 }
+
 
 void Cart::on_pushButton_2_clicked()
 {
-    payment_window = new Payment(this, restaurant_id);
+    qDebug() << CartData::GetInstance()->getInCartStr();
+    qDebug() << CartData::GetInstance()->getPriceList();
+    pointerStack["Cart"] = this;
+    payment_window = new Payment(pointerStack, restaurant_id);
     this->setEnabled(false);
     payment_window->show();
 }

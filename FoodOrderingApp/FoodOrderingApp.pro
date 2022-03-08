@@ -19,6 +19,7 @@ SOURCES += \
     restaurant.cpp
 
 HEADERS += \
+    Application.h \
     cart.h \
     cartdata.h \
     dish.h \

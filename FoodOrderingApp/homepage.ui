@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0">
+   <layout class="QVBoxLayout" name="verticalLayout" stretch="0,0,0,0,0,0">
     <property name="spacing">
      <number>20</number>
     </property>
@@ -34,19 +34,24 @@
      <number>50</number>
     </property>
     <item>
-     <widget class="QTableView" name="tableViewOrders"/>
-    </item>
-    <item>
-     <widget class="QPushButton" name="pushButton_addBalance">
+     <widget class="QLabel" name="label">
+      <property name="font">
+       <font>
+        <pointsize>36</pointsize>
+       </font>
+      </property>
       <property name="text">
-       <string>Add Balance</string>
+       <string>FooberEats Food Ordering Platform</string>
+      </property>
+      <property name="scaledContents">
+       <bool>false</bool>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_orderHistory">
+     <widget class="QPushButton" name="pushButton_orderNow">
       <property name="text">
-       <string>Order History</string>
+       <string>order now</string>
       </property>
      </widget>
     </item>
@@ -56,16 +61,26 @@
        <bool>true</bool>
       </property>
       <property name="text">
-       <string>Check Balance</string>
+       <string>check balance</string>
       </property>
      </widget>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_orderNow">
+     <widget class="QPushButton" name="pushButton_addBalance">
       <property name="text">
-       <string>Order Now</string>
+       <string>add balance</string>
       </property>
      </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton_orderHistory">
+      <property name="text">
+       <string>order history</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QTableView" name="tableViewOrders"/>
     </item>
    </layout>
   </widget>
@@ -75,7 +90,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

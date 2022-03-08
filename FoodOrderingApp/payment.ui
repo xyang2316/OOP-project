@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>180</y>
+      <x>270</x>
+      <y>280</y>
       <width>80</width>
       <height>31</height>
      </rect>
@@ -30,62 +30,62 @@
    <widget class="QPushButton" name="pushButton_addBalance">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>230</y>
+      <x>160</x>
+      <y>280</y>
       <width>101</width>
       <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Add Balance</string>
+     <string>add balance</string>
     </property>
    </widget>
    <widget class="QGroupBox" name="groupBox">
     <property name="geometry">
      <rect>
-      <x>440</x>
+      <x>40</x>
       <y>80</y>
       <width>331</width>
-      <height>131</height>
+      <height>191</height>
      </rect>
     </property>
     <property name="title">
-     <string>Add value to your wallet:</string>
+     <string/>
     </property>
     <widget class="QLabel" name="label_5">
      <property name="geometry">
       <rect>
-       <x>30</x>
-       <y>60</y>
+       <x>10</x>
+       <y>130</y>
        <width>121</width>
        <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Top up amount:</string>
+      <string>top up amount:</string>
      </property>
     </widget>
     <widget class="QLineEdit" name="lineEdit_payAmount">
      <property name="geometry">
       <rect>
-       <x>140</x>
-       <y>60</y>
+       <x>110</x>
+       <y>130</y>
        <width>113</width>
        <height>24</height>
       </rect>
      </property>
     </widget>
-   </widget>
-   <widget class="QWidget" name="verticalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>90</y>
-      <width>251</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout"/>
+    <widget class="QWidget" name="verticalLayoutWidget">
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>40</y>
+       <width>251</width>
+       <height>71</height>
+      </rect>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout"/>
+    </widget>
    </widget>
    <widget class="QPushButton" name="pushButton_backToCart">
     <property name="geometry">
@@ -97,14 +97,14 @@
      </rect>
     </property>
     <property name="text">
-     <string>Back to cart</string>
+     <string>back to cart</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_checkBalance">
     <property name="geometry">
      <rect>
-      <x>440</x>
-      <y>460</y>
+      <x>40</x>
+      <y>280</y>
       <width>111</width>
       <height>31</height>
      </rect>
@@ -113,28 +113,17 @@
      <string>Check balance</string>
     </property>
    </widget>
-   <widget class="QWidget" name="verticalLayoutWidget_2">
-    <property name="geometry">
-     <rect>
-      <x>440</x>
-      <y>360</y>
-      <width>251</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <layout class="QVBoxLayout" name="verticalLayout_balance"/>
-   </widget>
    <widget class="QPushButton" name="pushButton_home">
     <property name="geometry">
      <rect>
-      <x>90</x>
-      <y>470</y>
-      <width>80</width>
-      <height>24</height>
+      <x>140</x>
+      <y>30</y>
+      <width>91</width>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
-     <string>Menu</string>
+     <string>Home</string>
     </property>
    </widget>
   </widget>
@@ -144,7 +133,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>21</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>
