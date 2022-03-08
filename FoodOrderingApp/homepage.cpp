@@ -95,7 +95,7 @@ void HomePage::on_pushButton_orderHistory_clicked()
     model->setQuery("Select * from Orders ORDER BY o_id DESC");
 
     model->setHeaderData(0, Qt::Horizontal, tr("Order date"));
-    model->setHeaderData(1, Qt::Horizontal, tr("Order total"));
+    model->setHeaderData(1, Qt::Horizontal, tr("Order total($)"));
     model->setHeaderData(2, Qt::Horizontal, tr("Restaurant"));
     model->setHeaderData(3, Qt::Horizontal, tr("Order detail"));
     ui->tableViewOrders->setModel(model);

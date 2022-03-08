@@ -15,6 +15,7 @@ Payment::Payment(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidge
     this->restaurant_id = restaurant_id;
     ui->setupUi(this);
 
+    //please change to your local path to the pic
     QPixmap pix("/Users/yangxueying/Desktop/OOP-project/background.jpg");
     ui->label_pic->setPixmap(pix);
     ui->label_pic->setScaledContents(true);

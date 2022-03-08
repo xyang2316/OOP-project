@@ -20,7 +20,7 @@ DishList::DishList(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWid
     qDebug()<<"rid"<<QString::number(restaurant_id);
 
     dish_model->setHeaderData(1, Qt::Horizontal, tr("Dish Name"));
-    dish_model->setHeaderData(2, Qt::Horizontal, tr("Price"));
+    dish_model->setHeaderData(2, Qt::Horizontal, tr("Price($)"));
     dish_model->setHeaderData(3, Qt::Horizontal, tr("Dish Type"));
     ui->dishListTable->setModel(dish_model);
 
@@ -72,10 +72,3 @@ void DishList::on_viewCartButton_clicked()
     this->setEnabled(false);
     cart_window->show();
 }
-
-
-void DishList::on_dishListTable_clicked(const QModelIndex &index)
-{
-
-}
-
