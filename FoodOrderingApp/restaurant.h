@@ -19,7 +19,6 @@ public:
 
 private slots:
     void on_pushButton_clicked();
-    void on_restaurantTable_clicked(const QModelIndex &index);
     void on_pushButton_home_clicked();
 
 private:

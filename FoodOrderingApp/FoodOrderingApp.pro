@@ -15,6 +15,7 @@ SOURCES += \
     dishlist.cpp \
     homepage.cpp \
     main.cpp \
+    numberformatdelegate.cpp \
     payment.cpp \
     restaurant.cpp
 
@@ -26,6 +27,7 @@ HEADERS += \
     dishlist.h \
     homepage.h \
     initdb.h \
+    numberformatdelegate.h \
     payment.h \
     restaurant.h \
     typedef.h

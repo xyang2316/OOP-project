@@ -3,6 +3,7 @@
 #include "dish.h"
 #include "cart.h"
 #include "cartdata.h"
+#include "numberformatdelegate.h"
 #include <string>
 #include <QString>
 
@@ -31,6 +32,7 @@ DishList::DishList(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWid
     ui->dishListTable->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->dishListTable->setCurrentIndex(dish_model->index(0, 0));
 
+    ui->dishListTable->setItemDelegateForColumn(2, new NumberFormatDelegate(this));
 }
 
 DishList::~DishList()
@@ -65,6 +67,7 @@ void DishList::on_updateDishButton_clicked()
 
 void DishList::on_viewCartButton_clicked()
 {
+    pointerStack["Menu"] = this;
     cart_window = new Cart(pointerStack, restaurant_id);
     this->setEnabled(false);
     cart_window->show();

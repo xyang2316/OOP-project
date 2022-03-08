@@ -1,5 +1,6 @@
 #include "homepage.h"
 #include "ui_homepage.h"
+#include "numberformatdelegate.h"
 #include "initdb.h"
 #include "payment.h"
 #include <QMessageBox>
@@ -74,7 +75,7 @@ void HomePage::on_pushButton_addBalance_clicked()
     qry.prepare("update Wallet SET balance='"+ newValueStr +"' where w_id = 1");
     if (qry.exec()){
         QMessageBox msg;
-        msg.setText("Successfully added $" + topupValueStr + " to your e-wallet!");
+        msg.setText("Successfully added $" + topupValueStr + " to your e-wallet!\nCurrent balance is $" + newValueStr);
         msg.setWindowTitle(QStringLiteral("Payment success！"));
         msg.exec();
     }
@@ -103,5 +104,6 @@ void HomePage::on_pushButton_orderHistory_clicked()
     ui->tableViewOrders->setColumnWidth(1, 100);
     ui->tableViewOrders->setColumnWidth(2, 150);
     ui->tableViewOrders->setColumnWidth(3, 300);
+    ui->tableViewOrders->setItemDelegateForColumn(1, new NumberFormatDelegate(this));//debug
 }
 

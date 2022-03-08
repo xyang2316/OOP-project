@@ -11,13 +11,13 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Cart</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="goBackButton">
     <property name="geometry">
      <rect>
-      <x>100</x>
+      <x>110</x>
       <y>470</y>
       <width>100</width>
       <height>32</height>
@@ -30,7 +30,7 @@
    <widget class="QPushButton" name="updateDishButton">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>230</x>
       <y>470</y>
       <width>100</width>
       <height>32</height>
@@ -40,10 +40,10 @@
      <string>Update Dish</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="pushButton_toPayment">
     <property name="geometry">
      <rect>
-      <x>550</x>
+      <x>510</x>
       <y>470</y>
       <width>171</width>
       <height>31</height>
@@ -57,7 +57,7 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>10</y>
+      <y>40</y>
       <width>571</width>
       <height>411</height>
      </rect>
@@ -67,7 +67,7 @@
    <widget class="QPushButton" name="deleteButton">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>350</x>
       <y>470</y>
       <width>100</width>
       <height>32</height>
@@ -84,7 +84,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>24</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

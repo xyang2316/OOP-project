@@ -45,12 +45,6 @@ void Restaurant::on_pushButton_clicked()
     dish_list_window->show();
 }
 
-void Restaurant::on_restaurantTable_clicked(const QModelIndex &index)
-{
-//    qDebug()<<"click"<<index;
-}
-
-
 void Restaurant::on_pushButton_home_clicked()
 {
     this->home_window->setEnabled(true);

@@ -1,4 +1,3 @@
-#include "cartdata.h"
 #include <QApplication>
 #include "homepage.h"
 #include "Application.h"

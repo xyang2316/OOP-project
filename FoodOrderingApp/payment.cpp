@@ -15,6 +15,10 @@ Payment::Payment(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidge
     this->restaurant_id = restaurant_id;
     ui->setupUi(this);
 
+    QPixmap pix("/Users/yangxueying/Desktop/OOP-project/background.jpg");
+    ui->label_pic->setPixmap(pix);
+    ui->label_pic->setScaledContents(true);
+
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());
     QString sumDisplay = "Pay: $";
     sumDisplay += QString::number(CartData::GetInstance()->getSumInCart(),'f',2);
@@ -68,48 +72,50 @@ void Payment::on_pushButton_backToCart_clicked()
 
 void Payment::on_pushButton_clicked()
 {
+    if (sumToPay > 0) {
     //get updated balance
-    walletBalance = getWalletBalance();
-    if (sumToPay <= walletBalance)
-    {
-        QMessageBox msg;
-        msg.setText(QStringLiteral("We've received your order!"));
-        msg.setWindowTitle(QStringLiteral("Payment success！"));
-        msg.exec();
-        double newBalance = walletBalance - sumToPay;
-        QString newBalanceStr = QString::number(newBalance);
-        QSqlQuery qry;
-        qry.prepare("update Wallet SET balance='"+ newBalanceStr +"' where w_id = 1");//hard code
-        if (qry.exec()){
-            qDebug()<< "order success: new balance"<<newBalanceStr;
-        }
-        else{
-            qDebug()<<"order fail"<<qry.lastError();
-        }
-        //insert to order
-        QDateTime date = QDateTime::currentDateTime();
-        QString formattedTime = date.toString("dd.MM.yyyy hh:mm:ss");
-        qDebug()<< "incart string"<<inCartStr;
-        insertOrder(formattedTime, sumToPay, restaurant_id, inCartStr);
-        ui->pushButton->setEnabled(false);
-        sumToPay = CartData::GetInstance()->getSumInCart();
+        walletBalance = getWalletBalance();
+        if (sumToPay <= walletBalance)
+        {
+            QMessageBox msg;
+            msg.setText(QStringLiteral("We've received your order!"));
+            msg.setWindowTitle(QStringLiteral("Payment success！"));
+            msg.exec();
+            double newBalance = walletBalance - sumToPay;
+            QString newBalanceStr = QString::number(newBalance);
+            QSqlQuery qry;
+            qry.prepare("update Wallet SET balance='"+ newBalanceStr +"' where w_id = 1");//hard code
+            if (qry.exec()){
+                qDebug()<< "order success: new balance"<<newBalanceStr;
+            }
+            else{
+                qDebug()<<"order fail"<<qry.lastError();
+            }
+            //insert to order
+            QDateTime date = QDateTime::currentDateTime();
+            QString formattedTime = date.toString("dd.MM.yyyy hh:mm:ss");
+            qDebug()<< "incart string"<<inCartStr;
+            insertOrder(formattedTime, sumToPay, restaurant_id, inCartStr);
+            ui->pushButton->setEnabled(false);
+            sumToPay = CartData::GetInstance()->getSumInCart();
 
-        this->close();
-        cart_window->close();
-        pointerStack["Dish"]->close();
-        pointerStack["Menu"]->close();
-        pointerStack["Restaurant"]->close();
-        pointerStack["Homepage"]->setEnabled(true);
-        CartData::GetInstance()->clearCart();
-        qDebug() << CartData::GetInstance()->getInCartStr();
-        qDebug() << CartData::GetInstance()->getPriceList();
-    }
-    else
-    {
-        QMessageBox msg;
-        msg.setText(QStringLiteral("Your wallet balance is low. \nPlease top up."));
-        msg.setWindowTitle(QStringLiteral("Payment fail！"));
-        msg.exec();
+            this->close();
+            cart_window->close();
+            if (pointerStack["Dish"] != nullptr)    pointerStack["Dish"]->close();
+            if (pointerStack["Menu"] != nullptr)    pointerStack["Menu"]->close();
+            if (pointerStack["Restaurant"] != nullptr)    pointerStack["Restaurant"]->close();
+            pointerStack["Homepage"]->setEnabled(true);
+            CartData::GetInstance()->clearCart();
+            qDebug() << CartData::GetInstance()->getInCartStr();
+            qDebug() << CartData::GetInstance()->getPriceList();
+        }
+        else
+        {
+            QMessageBox msg;
+            msg.setText(QStringLiteral("Your wallet balance is low. \nPlease top up."));
+            msg.setWindowTitle(QStringLiteral("Payment fail！"));
+            msg.exec();
+        }
     }
 }
 
@@ -177,10 +183,9 @@ void Payment::on_pushButton_home_clicked()
 {
     this->close();
     cart_window->close();
-    pointerStack["Dish"]->close();
-    pointerStack["Menu"]->close();
-    pointerStack["Restaurant"]->close();
+    if (pointerStack["Dish"] != nullptr)    pointerStack["Dish"]->close();
+    if (pointerStack["Menu"] != nullptr)    pointerStack["Menu"]->close();
+    if (pointerStack["Restaurant"] != nullptr)    pointerStack["Restaurant"]->close();
     pointerStack["Homepage"]->setEnabled(true);
     CartData::GetInstance()->clearCart();
 }
-

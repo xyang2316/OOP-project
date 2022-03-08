@@ -59,41 +59,45 @@ void Cart::on_goBackButton_clicked()
 void Cart::on_updateDishButton_clicked()
 {
     QList<QRadioButton *> allButtons = ui->centralwidget->findChildren<QRadioButton *>();
-    int dishIndex = NULL;
+    int dishIndex = -1;
     for(int i = 0; i < allButtons.size(); ++i){
         if(allButtons.at(i)->isChecked()) {
             dishIndex = i;
         }
     }
-    QPair<int, QPair<QString, double>> temp = CartData::GetInstance()->removeDishFromCart(dishIndex);
-    int dishId = temp.first;
-    QString dishName = temp.second.first;
-    double dishPrice = temp.second.second;
-    CartData::GetInstance()->addDish(dishId,dishName, dishPrice);
-    pointerStack["Cart"] = this;
-    Dish* newDish_window = new Dish(pointerStack, dishId, dishPrice, restaurant_id);
-    newDish_window->show();
-    this->close();
+    if (dishIndex >= 0) {
+        QPair<int, QPair<QString, double>> temp = CartData::GetInstance()->removeDishFromCart(dishIndex);
+        int dishId = temp.first;
+        QString dishName = temp.second.first;
+        double dishPrice = temp.second.second;
+        CartData::GetInstance()->addDish(dishId,dishName, dishPrice);
+        pointerStack["Cart"] = this;
+        Dish* newDish_window = new Dish(pointerStack, dishId, dishPrice, restaurant_id);
+        newDish_window->show();
+        this->close();
+    }
 }
 
 void Cart::on_deleteButton_clicked()
 {
     QList<QRadioButton *> allButtons = ui->centralwidget->findChildren<QRadioButton *>();
-    int dishIndex;
+    int dishIndex = -1;
     for(int i = 0; i < allButtons.size(); ++i){
         if(allButtons.at(i)->isChecked()) {
             dishIndex = i;
         }
     }
-    CartData::GetInstance()->removeDishFromCart(dishIndex);
-    qDebug() << CartData::GetInstance()->getPriceList();
-    qDebug() << CartData::GetInstance()->getSumInCart();
+    if (dishIndex >= 0) {
+        CartData::GetInstance()->removeDishFromCart(dishIndex);
+        qDebug() << CartData::GetInstance()->getPriceList();
+        qDebug() << CartData::GetInstance()->getSumInCart();
 
-    this->dish_list_window->setEnabled(true);
-    this->close();
+        this->dish_list_window->setEnabled(true);
+        this->close();
+    }
 }
 
-void Cart::on_pushButton_2_clicked()
+void Cart::on_pushButton_toPayment_clicked()
 {
     qDebug() << CartData::GetInstance()->getInCartStr();
     qDebug() << CartData::GetInstance()->getPriceList();
