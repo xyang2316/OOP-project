@@ -5,8 +5,7 @@ Qt Creator 6.0.2
 with C++ compiler installed in your machine
 
 ## Before running the app:
-1. Change the path to your local path for the database in initdb.h file.
-2. Change the path to your local path for displaying the resource picture in payment.h. 
+To be able to successfully connected to the database and resources, please check out the global.cpp file and replace the homePath with your own path. 
 
 ## How to run this app?
 1. Download the source code or clone the repo to your local. 
