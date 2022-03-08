@@ -10,4 +10,4 @@ with C++ compiler installed in your machine
 
 ## How to run this app?
 1. Download the source code or clone the repo to your local. 
-2. Open the source code in Qt IDE and run it. The Qt may asking you to configure the project, please follow the their steps to do it.
+2. Open the source code in Qt IDE and run it. The Qt may asking you to configure the project, please follow their steps to do it.
