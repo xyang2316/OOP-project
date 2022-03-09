@@ -151,7 +151,6 @@ void Payment::insertOrder(QString oid, float sumPaid, int rid, QString dishesInf
     }
 }
 
-
 void Payment::on_pushButton_checkBalance_clicked()
 {
     QString balanceDisplay = "Your Balance: $";
