@@ -20,7 +20,7 @@ Cart::Cart(QMap<QString, QWidget*> pointerStack, int restaurant_id, QWidget *par
     ui->setupUi(this);
 
     QVBoxLayout* layout = qobject_cast<QVBoxLayout*>( ui->verticalLayout->layout());
-    QGroupBox *groupbox = new QGroupBox(tr("Order Summary:"));
+    QGroupBox *groupbox = new QGroupBox();
     layout->addWidget(groupbox);
     QVBoxLayout *vbox = new QVBoxLayout;
     for(int i = 0; i < CartData::GetInstance()->getCart().size(); i++) {

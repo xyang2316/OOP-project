@@ -10,6 +10,7 @@
 #include <QVBoxLayout>
 #include <QGroupBox>
 #include <QButtonGroup>
+#include "global.h"
 
 Dish::Dish(QMap<QString, QWidget*> pointerStack, int dish_id, double dish_price, int restaurant_id, QWidget *parent) :
     QMainWindow(parent),
@@ -21,6 +22,10 @@ Dish::Dish(QMap<QString, QWidget*> pointerStack, int dish_id, double dish_price,
     ui->setupUi(this);
     this->dish_id = dish_id;
     dishSum = dish_price;
+
+    QPixmap pix(Global::homePath + "/background-flipped.png");
+    ui->label_pic->setPixmap(pix);
+    ui->label_pic->setScaledContents(true);
 
     property_model = new QSqlRelationalTableModel();
     property_model->setEditStrategy(QSqlTableModel::OnManualSubmit);

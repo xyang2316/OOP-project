@@ -57,9 +57,9 @@
     <property name="geometry">
      <rect>
       <x>110</x>
-      <y>40</y>
+      <y>60</y>
       <width>571</width>
-      <height>411</height>
+      <height>391</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout"/>
@@ -75,6 +75,25 @@
     </property>
     <property name="text">
      <string>Delete Dish</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>110</x>
+      <y>40</y>
+      <width>171</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>14</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Order Summary:</string>
     </property>
    </widget>
   </widget>
