@@ -21,7 +21,6 @@ public:
     QPair<int, QPair<QString, double>> removeDishFromCart(int);
     void clearCart();
 
-//    ~Cart();
 protected:
     CartData();
     static CartData* cartData_;
